@@ -1,20 +1,29 @@
+import { IonicModule } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+
+import { NavbarComponent } from '../../../../shared/components/navbar/navbar.component';
 
 @Component({
   selector: 'app-my-profile',
   templateUrl: './my-profile.page.html',
   styleUrls: ['./my-profile.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, NavbarComponent],
 })
 export default class MyProfilePage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  segment: string = 'profile';
+  user = {
+    name: 'Juan',
+    lastName: 'Pérez',
+    email: 'juan.perez@example.com',
+    role: 'Usuario',
+  };
+  segmentChanged(event: any) {
+    this.segment = event.detail.value;
   }
+  constructor() {}
 
+  ngOnInit() {}
 }

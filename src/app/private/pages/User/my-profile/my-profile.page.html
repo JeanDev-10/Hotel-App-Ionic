@@ -1,13 +1,50 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>myProfile</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-navbar [title]="'Mi perfil'" hrefDefault="/dashboard" />
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">myProfile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <!-- Segment para cambiar entre Perfil y Configuración -->
+  <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="profile">
+      <ion-label>Perfil</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="settings">
+      <ion-label>Configuración</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Contenido del Perfil -->
+  <div *ngIf="segment === 'profile'" class="profile">
+    <div class="profile-container">
+      <ion-avatar class="profile-avatar">
+        <ion-img src="assets/images/avatar.avif" alt="Avatar" />
+      </ion-avatar>
+      <h2>{{ user.name }} {{ user.lastName }}</h2>
+      <p>{{ user.email }}</p>
+      <p><strong>Rol:</strong> {{ user.role }}</p>
+      <div>
+        <ion-button size="small" expand="block" fill="outline" color="danger" >Cerrar Sesión</ion-button>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- Contenido de Configuración -->
+  <div *ngIf="segment === 'settings'" class="settings">
+    <ion-text color="dark" class="ion-text-center">
+      <h1>Cambiar contraseña</h1>
+    </ion-text>
+    <form>
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked">Contraseña actual</ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Nueva contraseña</ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-button size="small" expand="block" fill="outline" color="success" >Cambiar contraseña</ion-button>
+    </form>
+  </div>
 </ion-content>
