@@ -1,13 +1,78 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-navbar [title]="'Register'" hrefDefault="/auth/login"></app-navbar>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">register</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <div class="flex-register">
+    <ion-text color="dark">
+      <h1>Registrarse</h1>
+    </ion-text>
+    <form >
+      <ion-item>
+        <ion-label position="stacked">Nombres</ion-label>
+        <ion-input
+          fill="outline"
+          [clearInput]="true"
+          [counter]="true"
+          maxlength="30"
+          placeholder="Juan"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Apellidos</ion-label>
+        <ion-input
+          fill="outline"
+          [clearInput]="true"
+          [counter]="true"
+          maxlength="30"
+          placeholder="Peréz"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Correo</ion-label>
+        <ion-input
+          fill="outline"
+          [clearInput]="true"
+          [counter]="true"
+          maxlength="50"
+          type="email"
+          placeholder="example@hotmail.com"
+        ></ion-input>
+
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input
+          fill="outline"
+          [counter]="true"
+          maxlength="10"
+          placeholder="**********"
+        >
+          <ion-button
+            fill="clear"
+            slot="end"
+            aria-label="Show/hide"
+          >
+            <ion-icon
+              slot="icon-only"
+            ></ion-icon>
+          </ion-button>
+        </ion-input>
+      </ion-item>
+
+      <div class="flex_button_register">
+        <ion-text color="secondary" routerLink="/auth/login">
+          <p>¿Ya tienes cuenta?</p>
+        </ion-text>
+        <ion-button color="warning" fill="outline"
+          type="submit"
+        >
+          <ion-icon name="person-add-outline"></ion-icon>
+          Registrarse
+        </ion-button>
+      </div>
+    </form>
+  </div>
 </ion-content>
