@@ -1,13 +1,86 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>oneReservation</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-navbar
+  title="Detalle de reservación"
+  hrefDefault="/dashboard/reservation"
+/>
+<ion-content class="ion-padding">
+  <!-- Información de la reservación -->
+  @if(reservation){
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">oneReservation</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>
+        <strong>Estado: </strong> <ion-text [color]="reservation.status_reservation.id==3?'danger':'warning'">{{ reservation.status_reservation.name }}</ion-text>
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <!-- Información de la habitación -->
+      <p><strong>Habitación:</strong> {{ reservation.room.name }}</p>
+      <p>
+        <strong>Tipo de habitación:</strong> {{ reservation.room.types_room.name
+        }}
+      </p>
+      <p><strong>Descripción:</strong> {{ reservation.room.description }}</p>
+      <p><strong>Precio por noche:</strong> ${{ reservation.room.price }}</p>
+      <p><strong>Precio total:</strong> ${{ reservation.price_total }}</p>
+      <p>
+        <strong>Fecha de inicio:</strong> {{ reservation.date_start | date:
+        'medium' }}
+      </p>
+      <p>
+        <strong>Fecha de fin:</strong> {{ reservation.date_end | date: 'medium'
+        }}
+      </p>
+
+      <!-- Galería de imágenes de la habitación -->
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" *ngFor="let image of reservation.room.images">
+            <ion-img [src]="image.url" alt="Imagen de la habitación"></ion-img>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Información del usuario -->
+  @if(isAdmin){
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Información del Usuario</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>
+        <strong>Nombre:</strong> {{ reservation.user.name }} {{
+        reservation.user.lastname }}
+      </p>
+      <p><strong>Email:</strong> {{ reservation.user.email }}</p>
+      <div class="button-reserva">
+        <ion-button
+          fill="outline"
+          size="small"
+          color="warning"
+          [routerLink]="'/dashboard/profile/'+reservation.user.id"
+        >
+          Ver Perfil del Usuario
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  }
+
+  <!-- Botón para cancelar reservación (solo si está pendiente) -->
+  @if(reservation.status_id === 1 && isAdmin==false){
+  <div class="button-reserva">
+    <ion-button
+      fill="outline"
+      color="danger"
+      (click)="cancelReservation(reservation.id)"
+    >
+      Cancelar Reservación
+    </ion-button>
+  </div>
+  } }
 </ion-content>
