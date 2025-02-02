@@ -1,0 +1,7 @@
+{
+  "name": "Ionic-Hotel-App",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
