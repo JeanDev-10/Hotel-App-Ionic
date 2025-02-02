@@ -12,20 +12,15 @@
   </ion-segment>
 
   <!-- Contenido del Perfil -->
-  <div *ngIf="segment === 'profile'" class="profile">
+  <div *ngIf="segment === 'profile'">
     <div class="profile-container">
-      <ion-avatar class="profile-avatar">
-        <ion-img src="assets/images/avatar.avif" alt="Avatar" />
-      </ion-avatar>
-      <h2>{{ user.name }} {{ user.lastName }}</h2>
-      <p>{{ user.email }}</p>
-      <p><strong>Rol:</strong> {{ user.role }}</p>
+      <app-profile [user]="user" />
       <div>
-        <ion-button size="small" expand="block" fill="outline" color="danger" >Cerrar Sesión</ion-button>
+        <ion-button size="small" expand="block" fill="outline" color="danger"
+          >Cerrar Sesión</ion-button
+        >
       </div>
     </div>
-
-
   </div>
 
   <!-- Contenido de Configuración -->
@@ -44,7 +39,9 @@
           <ion-input type="password"></ion-input>
         </ion-item>
       </ion-list>
-      <ion-button size="small" expand="block" fill="outline" color="success" >Cambiar contraseña</ion-button>
+      <ion-button size="small" expand="block" fill="outline" color="success"
+        >Cambiar contraseña</ion-button
+      >
     </form>
   </div>
 </ion-content>

@@ -1,0 +1,24 @@
+/* profile.component.scss */
+.user-info {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.reservation-card {
+  margin: 1rem 0;
+  width: 100%;
+
+  ion-card-content {
+    p {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0.5rem 0;
+    }
+  }
+}

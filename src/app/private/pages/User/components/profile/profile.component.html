@@ -1,0 +1,11 @@
+<div class="profile">
+  @if(user){
+  <ion-avatar class="profile-avatar">
+    <ion-img src="assets/images/avatar.avif" alt="Avatar" />
+  </ion-avatar>
+  <h2>{{ user.name }} {{ user.lastName }}</h2>
+  <p>{{ user.email }}</p>
+  <p><strong>Rol:</strong> {{ user.role }}</p>
+
+  }
+</div>
