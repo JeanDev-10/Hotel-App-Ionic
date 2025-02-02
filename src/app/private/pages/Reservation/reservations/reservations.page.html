@@ -1,13 +1,7 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>reservations</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-navbar  title="Reservaciones" />
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">reservations</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <app-reservation-list  [reservations]="reservations"
+  [showUserInfo]="isAdmin" />
+
 </ion-content>
