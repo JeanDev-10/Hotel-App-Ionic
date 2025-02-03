@@ -5,6 +5,8 @@ import { RoomFilterComponent } from '../components/room-filter/room-filter.compo
 import { RoomCardComponent } from '../components/room-card/room-card.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { addCircle, addCircleOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-rooms',
@@ -16,7 +18,8 @@ import { RouterModule } from '@angular/router';
     NavbarComponent,
     RoomFilterComponent,
     RoomCardComponent,
-    CommonModule,RouterModule
+    CommonModule,
+    RouterModule,
   ],
 })
 export default class RoomsPage implements OnInit {
@@ -132,7 +135,9 @@ export default class RoomsPage implements OnInit {
       ],
     },
   ]; // Habitaciones filtradas
-  constructor() {}
+  constructor() {
+    this.registerIcons()
+  }
 
   ngOnInit() {}
   onFilterChange(type: string) {
@@ -143,5 +148,10 @@ export default class RoomsPage implements OnInit {
     } else {
       this.filteredRooms = this.rooms; // Mostrar todas las habitaciones si no hay filtro
     }
+  }
+  registerIcons() {
+    addIcons({
+      addCircleOutline,
+    });
   }
 }

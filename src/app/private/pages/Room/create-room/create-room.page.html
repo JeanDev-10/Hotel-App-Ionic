@@ -1,13 +1,10 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>createRoom</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-navbar title="Crear habitación" hrefDefault="/dashboard/room" />
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">createRoom</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <app-room-form
+  [roomTypes]="roomTypes"
+  (formSubmit)="onFormSubmit($event)"
+/>
+
+<app-image-upload (imagesChange)="onImagesChange($event)" />
 </ion-content>
