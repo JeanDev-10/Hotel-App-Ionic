@@ -1,20 +1,68 @@
-import { Component, OnInit } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { NavbarComponent } from "../../../../shared/components/navbar/navbar.component";
+import { RoomGalleryComponent } from "../components/room-gallery/room-gallery.component";
+import { RoomActionsComponent } from "../components/room-actions/room-actions.component";
 
 @Component({
   selector: 'app-one-room',
   templateUrl: './one-room.page.html',
   styleUrls: ['./one-room.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, NavbarComponent, IonicModule, RoomGalleryComponent, RoomActionsComponent]
 })
-export default class OneRoomPage implements OnInit {
+export default class OneRoomPage  {
 
-  constructor() { }
+  room: any =
+    {
+      id: 1,
+      name: 'Room 101',
+      description: 'Habitación de lujo',
+      price: 200,
+      types_room: {
+        id: 1,
+        name: 'Suite',
+      },
+      images: [
+        {
+          id: 11,
+          url: 'https://hotelvictoriachone.com/wp-content/uploads/2022/12/HABITACION-MATRIMONIAL-2-HOTEL-VICTORIA-CHONE-1750x1000.jpg',
+          public_id: 'asdsada',
+          room_id: 3,
+        },
+        {
+          id: 11,
+          url: 'https://hotelvictoriachone.com/wp-content/uploads/2022/12/HABITACION-MATRIMONIAL-2-HOTEL-VICTORIA-CHONE-1750x1000.jpg',
+          public_id: 'asdsada',
+          room_id: 3,
+        },
+        {
+          id: 11,
+          url: 'https://hotelvictoriachone.com/wp-content/uploads/2022/12/HABITACION-MATRIMONIAL-2-HOTEL-VICTORIA-CHONE-1750x1000.jpg',
+          public_id: 'asdsada',
+          room_id: 3,
+        },
+        {
+          id: 11,
+          url: 'https://hotelvictoriachone.com/wp-content/uploads/2022/12/HABITACION-MATRIMONIAL-2-HOTEL-VICTORIA-CHONE-1750x1000.jpg',
+          public_id: 'asdsada',
+          room_id: 3,
+        },
+      ]
+    }
+  isAdmin: boolean = false; // Indica si el usuario es admin
+// Métodos para manejar acciones
+onEdit() {
+  console.log('Editar habitación');
+}
 
-  ngOnInit() {
-  }
+onDelete() {
+  console.log('Eliminar habitación');
+}
 
+onReserve() {
+  console.log('Reservar habitación');
+}
 }
