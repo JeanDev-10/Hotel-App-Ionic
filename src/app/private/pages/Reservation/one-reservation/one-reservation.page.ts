@@ -5,13 +5,14 @@ import { FormsModule } from '@angular/forms';
 
 import { NavbarComponent } from '../../../../shared/components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
+import { RoomGalleryComponent } from "../../Room/components/room-gallery/room-gallery.component";
 
 @Component({
   selector: 'app-one-reservation',
   templateUrl: './one-reservation.page.html',
   styleUrls: ['./one-reservation.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, NavbarComponent,RouterModule],
+  imports: [IonicModule, CommonModule, FormsModule, NavbarComponent, RouterModule, RoomGalleryComponent],
 })
 export default class OneReservationPage implements OnInit {
   isAdmin:boolean=true;

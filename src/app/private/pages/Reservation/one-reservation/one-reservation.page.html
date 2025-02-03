@@ -33,13 +33,14 @@
       </p>
 
       <!-- Galería de imágenes de la habitación -->
-      <ion-grid>
+       <app-room-gallery [images]="reservation.room.images" />
+      <!-- <ion-grid>
         <ion-row>
           <ion-col size="6" *ngFor="let image of reservation.room.images">
             <ion-img [src]="image.url" alt="Imagen de la habitación"></ion-img>
           </ion-col>
         </ion-row>
-      </ion-grid>
+      </ion-grid> -->
     </ion-card-content>
   </ion-card>
 
