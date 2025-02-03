@@ -5,6 +5,26 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ReservationService {
-  private readonly api_url = `${environment.ApiUrl}`;
-  private readonly _http = inject(HttpClient);
+  private readonly apiUrl = `${environment.ApiUrl}reservation`;
+  private readonly http=inject(HttpClient)
+
+  getAllReservations() {
+    return this.http.get(this.apiUrl);
+  }
+
+  getMyReservations() {
+    return this.http.get(`${this.apiUrl}/client`);
+  }
+
+  getReservationById(id: string) {
+    return this.http.get(`${this.apiUrl}/${id}`);
+  }
+
+  createReservation(reservationData: any) {
+    return this.http.post(this.apiUrl, reservationData);
+  }
+
+  cancelReservation(id: string) {
+    return this.http.patch(`${this.apiUrl}/${id}`, {});
+  }
 }
