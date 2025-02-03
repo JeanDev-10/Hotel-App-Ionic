@@ -5,13 +5,14 @@ import { FormsModule } from '@angular/forms';
 
 import { NavbarComponent } from '../../../../shared/components/navbar/navbar.component';
 import { ProfileComponent } from "../components/profile/profile.component";
+import { ChangePasswordComponent } from "../components/change-password/change-password.component";
 
 @Component({
   selector: 'app-my-profile',
   templateUrl: './my-profile.page.html',
   styleUrls: ['./my-profile.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, NavbarComponent, ProfileComponent],
+  imports: [IonicModule, CommonModule, FormsModule, NavbarComponent, ProfileComponent, ChangePasswordComponent],
 })
 export default class MyProfilePage implements OnInit {
   segment: string = 'profile';

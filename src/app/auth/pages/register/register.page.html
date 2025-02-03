@@ -73,11 +73,20 @@
           fill="outline"
           [counter]="true"
           formControlName="password"
-          maxlength="10"
+          maxlength="20"
           placeholder="**********"
+          [type]="IsPassword?'text':'password'"
         >
-          <ion-button fill="clear" slot="end">
-            <ion-icon slot="icon-only"></ion-icon>
+        <ion-button
+            (click)="SeePassword()"
+            fill="clear"
+            [color]="registerForm.get('password')?.invalid&&getFormHasTouch('password')?'danger':'primary'"
+            slot="end"
+          >
+            <ion-icon
+              slot="icon-only"
+              [name]="IsPassword ? 'eye-outline' : 'eye-off-outline'"
+            ></ion-icon>
           </ion-button>
         </ion-input>
         @if(getformHasError('password','required') &&

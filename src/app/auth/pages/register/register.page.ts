@@ -37,12 +37,8 @@ export default class RegisterPage implements OnInit {
   }
 
 
-  SeePassword(text: string) {
-    if (text == 'password') {
+  SeePassword() {
       this.IsPassword = !this.IsPassword;
-    } else {
-      this.IsConfirmationPassword = !this.IsConfirmationPassword;
-    }
   }
   ngOnInit() {}
   getformHasError(field: string, rule: string): boolean | undefined {
@@ -51,6 +47,7 @@ export default class RegisterPage implements OnInit {
   getFormHasTouch(field: string): boolean | undefined {
     return this.registerForm.get(field)?.touched;
   }
+
   private registerRegisterForm() {
     this.registerForm = this.fb.group(
       {

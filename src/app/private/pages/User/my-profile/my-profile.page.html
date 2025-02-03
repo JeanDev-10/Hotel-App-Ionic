@@ -16,7 +16,7 @@
     <div class="profile-container">
       <app-profile [user]="user" />
       <div>
-        <ion-button  expand="block" fill="outline" color="danger"
+        <ion-button expand="block" fill="outline" color="danger"
           >Cerrar Sesión</ion-button
         >
       </div>
@@ -25,23 +25,6 @@
 
   <!-- Contenido de Configuración -->
   <div *ngIf="segment === 'settings'" class="settings">
-    <ion-text color="dark" class="ion-text-center">
-      <h1>Cambiar contraseña</h1>
-    </ion-text>
-    <form>
-      <ion-list>
-        <ion-item>
-          <ion-label position="stacked">Contraseña actual</ion-label>
-          <ion-input type="password"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="stacked">Nueva contraseña</ion-label>
-          <ion-input type="password"></ion-input>
-        </ion-item>
-      </ion-list>
-      <ion-button expand="block" fill="outline" color="success"
-        >Cambiar contraseña</ion-button
-      >
-    </form>
+    <app-change-password />
   </div>
 </ion-content>

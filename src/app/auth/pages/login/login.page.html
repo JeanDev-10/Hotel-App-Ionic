@@ -32,7 +32,7 @@
           formControlName="password"
           fill="outline"
           [counter]="true"
-          maxlength="10"
+          maxlength="20"
           tabindex="2"
           [type]="IsPassword ? 'text' : 'password'"
           placeholder="**********"
@@ -42,12 +42,10 @@
             fill="clear"
             [color]="loginForm.get('password')?.invalid&&getFormHasTouch('password')?'danger':'primary'"
             slot="end"
-            aria-label="Show/hide"
           >
             <ion-icon
               slot="icon-only"
               [name]="IsPassword ? 'eye-outline' : 'eye-off-outline'"
-              aria-hidden="true"
             ></ion-icon>
           </ion-button>
         </ion-input>

@@ -11,4 +11,7 @@ export class UserService {
   getUserReservations(userId: string) {
     return this._http.get(`${this.apiUrl}/${userId}/reservations`);
   }
+  changePassword(data: any) {
+    return this._http.put(`${this.apiUrl}/password`,data);
+  }
 }
