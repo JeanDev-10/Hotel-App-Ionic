@@ -1,14 +1,16 @@
-<app-navbar [title]="'Inicio sesión'" hrefDefault="/" />
+<app-navbar [title]="'Inicio de sesión'" />
 
 <ion-content [fullscreen]="true">
+
   <div class="flex-register">
     <ion-text color="dark">
-      <h1>Inicia sesión</h1>
+      <h1>Inicio de sesión</h1>
     </ion-text>
-    <form >
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <ion-item>
         <ion-label position="stacked">Correo</ion-label>
         <ion-input
+          formControlName="email"
           fill="outline"
           [clearInput]="true"
           [counter]="true"
@@ -17,37 +19,67 @@
           placeholder="example@hotmail.com"
           tabindex="1"
         ></ion-input>
+        @if(getformHasError('email','required')&&getFormHasTouch('email')){
+        <ion-note color="danger"> Correo es requerido. </ion-note>
+        } @if(getformHasError('email','email')&&getFormHasTouch('email')){
+        <ion-note color="danger"> Correo invalido. </ion-note>
+        }
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Contraseña</ion-label>
         <ion-input
+          formControlName="password"
           fill="outline"
           [counter]="true"
           maxlength="10"
           tabindex="2"
+          [type]="IsPassword ? 'text' : 'password'"
           placeholder="**********"
         >
           <ion-button
+            (click)="SeePassword()"
             fill="clear"
+            [color]="loginForm.get('password')?.invalid&&getFormHasTouch('password')?'danger':'primary'"
             slot="end"
+            aria-label="Show/hide"
           >
             <ion-icon
               slot="icon-only"
+              [name]="IsPassword ? 'eye-outline' : 'eye-off-outline'"
+              aria-hidden="true"
             ></ion-icon>
           </ion-button>
         </ion-input>
+        @if(getformHasError('password','required') &&
+        getFormHasTouch('password')){
 
+        <ion-note color="danger"> Contraseña es requerida. </ion-note>
+
+        } @if(getformHasError('password','minlength') &&
+        getFormHasTouch('password')){
+        <ion-note color="danger">
+          Contraseña debe tener mínimo 3 caracteres
+        </ion-note>
+
+        } @if(getformHasError('password','maxlength') &&
+        getFormHasTouch('password')){
+        <ion-note color="danger">
+          Contraseña debe tener máximo 10 caracteres
+        </ion-note>
+        }
       </ion-item>
 
       <div class="flex_button_register">
         <ion-text color="secondary" routerLink="/auth/register">
           <p>¿No tienes cuenta?</p>
         </ion-text>
-        <ion-button color="warning" fill="outline"
+        <ion-button
+          [fill]="loginForm.invalid?'outline':'clear'"
           type="submit"
+          [disabled]="loginForm.invalid"
         >
-          <ion-icon  name="person-add-outline"></ion-icon>
+          <ion-icon name="person-add-outline"></ion-icon>
           Iniciar Sesión
         </ion-button>
       </div>
