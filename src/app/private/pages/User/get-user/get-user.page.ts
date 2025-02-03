@@ -5,9 +5,8 @@ import { FormsModule } from '@angular/forms';
 
 import { NavbarComponent } from '../../../../shared/components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
-import { ProfileComponent } from "../components/profile/profile.component";
-import { ReservationsListComponent } from "../../Reservation/components/reservations-list/reservations-list.component";
-
+import { ProfileComponent } from '../components/profile/profile.component';
+import { ReservationsListComponent } from '../../Reservation/components/reservations-list/reservations-list.component';
 
 @Component({
   selector: 'app-get-user',
@@ -21,8 +20,8 @@ import { ReservationsListComponent } from "../../Reservation/components/reservat
     NavbarComponent,
     RouterModule,
     ProfileComponent,
-    ReservationsListComponent
-],
+    ReservationsListComponent,
+  ],
 })
 export default class GetUserPage implements OnInit {
   userData = {
@@ -32,6 +31,10 @@ export default class GetUserPage implements OnInit {
       name: 'jean',
       lastname: 'rodriguez',
       email: 'jean@hotmail.com',
+      role: {
+        id: 2,
+        name: 'Client',
+      },
       reservations: [
         {
           id: 2,

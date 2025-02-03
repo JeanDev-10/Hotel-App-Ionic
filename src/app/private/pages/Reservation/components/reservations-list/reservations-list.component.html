@@ -19,11 +19,11 @@
         </p>
         <p>
           <strong>Fecha de inicio:</strong>
-          {{ reservation.date_start | date : "medium" }}
+          {{ reservation.date_start | date : "fullDate" }}
         </p>
         <p>
           <strong>Fecha de fin:</strong>
-          {{ reservation.date_end | date : "medium" }}
+          {{ reservation.date_end | date : "fullDate" }}
         </p>
         <p><strong>Precio total:</strong> ${{ reservation.price_total }}</p>
 

@@ -48,7 +48,20 @@ export default class CreateReservationPage implements OnInit {
         room_id: 3,
       },
     ],
-  }; // Datos de la habitación
+    reservations:[
+      {
+        date_start: "2025-01-30T22:16:45.000Z",
+        date_end: "2025-01-30T22:16:45.000Z",
+      },
+      {
+        date_start: "2025-01-30T22:16:45.000Z",
+        date_end: "2025-01-30T22:16:45.000Z",
+      },
+      {
+        date_start: "2025-01-30T22:16:45.000Z",
+        date_end: "2025-01-30T22:16:45.000Z",
+      },
+    ]};
   dateStart!: string; // Fecha de inicio
   dateEnd!: string; // Fecha de fin
   totalPrice: number = 0;

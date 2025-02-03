@@ -19,7 +19,9 @@ export default class MyProfilePage implements OnInit {
     name: 'Juan',
     lastName: 'Pérez',
     email: 'juan.perez@example.com',
-    role: 'Usuario',
+    role: {
+      name:"cliente"
+    },
   };
   segmentChanged(event: any) {
     this.segment = event.detail.value;

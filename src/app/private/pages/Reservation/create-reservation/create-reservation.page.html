@@ -1,4 +1,4 @@
-<app-navbar title="Crear reservación" hrefDefault="/dashborad/room"  />
+<app-navbar title="Crear reservación" hrefDefault="/dashborad/room" />
 
 <ion-content class="ion-padding">
   <!-- Información de la habitación -->
@@ -22,7 +22,23 @@
       </ion-grid>
     </ion-card-content>
   </ion-card>
-
+  @if(room.reservations.length > 0){
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Fechas que han sido reservadas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let reservation of room.reservations">
+          <ion-label>
+            Del {{ reservation.date_start | date:'fullDate' }} hasta el {{
+            reservation.date_end | date:'fullDate' }}
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  }
   <!-- Formulario de reservación -->
   <ion-list>
     <!-- Fecha de inicio -->
@@ -33,35 +49,41 @@
         min="{{ minStartDate }}"
         max="{{ maxStartDate }}"
         (ionChange)="calculateTotalPrice()"
-        [(ngModel)]="dateStart">
+        [(ngModel)]="dateStart"
+      >
       </ion-datetime>
     </ion-item>
 
     <!-- Fecha de fin -->
-      <ion-item>
-        <ion-label position="stacked">Fecha de fin</ion-label>
-        <ion-datetime
-          displayFormat="DD/MM/YYYY"
-          min="{{ minEndDate }}"
-          [(ngModel)]="dateEnd"
-          (ionChange)="calculateTotalPrice()">
-        </ion-datetime>
-      </ion-item>
-
+    <ion-item>
+      <ion-label position="stacked">Fecha de fin</ion-label>
+      <ion-datetime
+        displayFormat="DD/MM/YYYY"
+        min="{{ minEndDate }}"
+        [(ngModel)]="dateEnd"
+        (ionChange)="calculateTotalPrice()"
+      >
+      </ion-datetime>
+    </ion-item>
   </ion-list>
   <ion-card>
     <ion-card-content>
-      <p><strong>Precio total:</strong> <ion-text color="success">
-        ${{ totalPrice }}
-      </ion-text> </p>
+      <p>
+        <strong>Precio total:</strong>
+        <ion-text color="success"> ${{ totalPrice }} </ion-text>
+      </p>
     </ion-card-content>
   </ion-card>
 
   <!-- Botón para crear reservación -->
   <div class="button-reserva">
-    <ion-button fill="outline" color="warning"  (click)="createReservation()" [disabled]="!isFormValid()">
+    <ion-button
+      fill="outline"
+      color="warning"
+      (click)="createReservation()"
+      [disabled]="!isFormValid()"
+    >
       Crear Reservación
     </ion-button>
   </div>
-
 </ion-content>
