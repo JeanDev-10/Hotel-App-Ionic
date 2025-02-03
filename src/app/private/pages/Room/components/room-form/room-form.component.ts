@@ -10,9 +10,10 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   templateUrl: './room-form.component.html',
   styleUrls: ['./room-form.component.scss'],
 })
-export class RoomFormComponent  {
+export class RoomFormComponent implements OnInit  {
 
   @Input() roomTypes: any[] = []; // Tipos de habitación
+  @Input() roomData: any = null; // Datos de la habitación
   @Output() formSubmit = new EventEmitter<any>(); // Emite los datos del formulario
 
   roomForm: FormGroup;
@@ -24,6 +25,11 @@ export class RoomFormComponent  {
       price: [0, [Validators.required, Validators.min(0.01)]],
       type_id: ['', Validators.required],
     });
+  }
+  ngOnInit(): void {
+    if (this.roomData) {
+      this.roomForm.patchValue(this.roomData); // Precargar los datos del formulario
+    }
   }
 
   // Envía los datos del formulario al componente padre

@@ -14,25 +14,37 @@
       style="display: none"
       #fileInput
     />
-    <ion-button expand="block" (click)="fileInput.click()">
+    <ion-button color="warning" expand="block" (click)="fileInput.click()">
       Seleccionar imágenes
     </ion-button>
 
+    @if(existingImages){
+      <app-room-gallery [images]="existingImages" />
+    }
+
     <!-- Vista previa de las imágenes -->
-    <ion-grid>
-      <ion-row>
-        <ion-col size="6" *ngFor="let image of images; let i = index">
-          <ion-img [src]="image.preview" alt="Vista previa"></ion-img>
-          <ion-button
-            fill="clear"
-            color="danger"
-            (click)="removeImage(i)"
-            size="small"
-          >
-            Eliminar
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Vista previa de imagenes</ion-card-title>
+        <ion-card-subtitle>Máximo 5 imágenes (5MB cada una)</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6" *ngFor="let image of images; let i = index">
+              <ion-img [src]="image.preview" alt="Vista previa"></ion-img>
+              <ion-button
+                fill="clear"
+                color="danger"
+                (click)="removeImage(i)"
+                size="small"
+              >
+                Eliminar
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
   </ion-card-content>
 </ion-card>

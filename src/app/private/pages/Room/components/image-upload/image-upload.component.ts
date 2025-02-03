@@ -1,15 +1,17 @@
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { RoomGalleryComponent } from "../room-gallery/room-gallery.component";
 
 @Component({
   selector: 'app-image-upload',
   standalone:true,
-  imports:[CommonModule,IonicModule],
+  imports: [CommonModule, IonicModule, RoomGalleryComponent],
   templateUrl: './image-upload.component.html',
   styleUrls: ['./image-upload.component.scss'],
 })
 export class ImageUploadComponent  {
+  @Input() existingImages: any[] = []; // Imágenes existentes
   images: { file: File; preview: string }[] = []; // Imágenes seleccionadas
   @Output() imagesChange = new EventEmitter<File[]>(); // Emite las imágenes al componente padre
 

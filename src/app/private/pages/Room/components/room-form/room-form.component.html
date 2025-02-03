@@ -1,7 +1,7 @@
 <!-- room-form.component.html -->
 <ion-card>
   <ion-card-header>
-    <ion-card-title>Crear Habitación</ion-card-title>
+    <ion-card-title>{{roomData==null?'Crear':'Editar'}} Habitación</ion-card-title>
   </ion-card-header>
 
   <ion-card-content>
@@ -51,7 +51,7 @@
 
       <!-- Botón de envío -->
       <ion-button expand="block" type="submit" [disabled]="roomForm.invalid">
-        Crear Habitación
+        {{roomData==null?'Crear':'Editar'}} Habitación
       </ion-button>
     </form>
   </ion-card-content>
