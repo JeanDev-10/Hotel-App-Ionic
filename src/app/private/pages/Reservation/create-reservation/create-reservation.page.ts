@@ -3,14 +3,21 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../../../../shared/components/navbar/navbar.component';
-import { RoomGalleryComponent } from "../../Room/components/room-gallery/room-gallery.component";
+import { RoomGalleryComponent } from '../../Room/components/room-gallery/room-gallery.component';
+import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-create-reservation',
   templateUrl: './create-reservation.page.html',
   styleUrls: ['./create-reservation.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, NavbarComponent, RoomGalleryComponent],
+  imports: [
+    IonicModule,
+    CommonModule,
+    FormsModule,
+    NavbarComponent,
+    RoomGalleryComponent,
+  ],
 })
 export default class CreateReservationPage implements OnInit {
   room: any = {
@@ -37,20 +44,21 @@ export default class CreateReservationPage implements OnInit {
         room_id: 3,
       },
     ],
-    reservations:[
+    reservations: [
       {
-        date_start: "2025-01-30T22:16:45.000Z",
-        date_end: "2025-01-30T22:16:45.000Z",
+        date_start: '2025-01-30T22:16:45.000Z',
+        date_end: '2025-01-30T22:16:45.000Z',
       },
       {
-        date_start: "2025-01-30T22:16:45.000Z",
-        date_end: "2025-01-30T22:16:45.000Z",
+        date_start: '2025-01-30T22:16:45.000Z',
+        date_end: '2025-01-30T22:16:45.000Z',
       },
       {
-        date_start: "2025-01-30T22:16:45.000Z",
-        date_end: "2025-01-30T22:16:45.000Z",
+        date_start: '2025-01-30T22:16:45.000Z',
+        date_end: '2025-01-30T22:16:45.000Z',
       },
-    ]};
+    ],
+  };
   dateStart!: string; // Fecha de inicio
   dateEnd!: string; // Fecha de fin
   totalPrice: number = 0;
@@ -59,7 +67,7 @@ export default class CreateReservationPage implements OnInit {
   maxStartDate!: string;
   minEndDate!: string;
 
-  constructor() {}
+  constructor(private readonly _toastService: ToastService) {}
 
   ngOnInit() {
     // Obtener la habitación desde el estado de navegación
@@ -97,13 +105,14 @@ export default class CreateReservationPage implements OnInit {
       const endDate = new Date(this.dateEnd);
       const timeDiff = endDate.getTime() - startDate.getTime();
       const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Diferencia en días
-      if(daysDiff>0){
+      if (daysDiff > 0) {
         this.totalPrice = daysDiff * this.room.price; // Precio total
-      }else{
-      console.log("toast no se puede con dias invalidos")
-      this.totalPrice = 0;
-      this.dateStart=""; // Fecha de inicio
-      this.dateEnd=""
+      } else {
+        this._toastService.presentToastError('Deben ser fechas validas');
+        console.log('toast no se puede con dias invalidos');
+        this.totalPrice = 0;
+        this.dateStart = ''; // Fecha de inicio
+        this.dateEnd = '';
       }
     } else {
       this.totalPrice = 0;

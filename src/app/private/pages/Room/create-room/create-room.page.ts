@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../../../../shared/components/navbar/navbar.component';
 import { RoomFormComponent } from '../components/room-form/room-form.component';
 import { ImageUploadComponent } from '../components/image-upload/image-upload.component';
+import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-create-room',
@@ -36,13 +37,13 @@ export default class CreateRoomPage implements OnInit {
     },
   ]; // Tipos de habitación
   selectedImages: File[] = []; // Imágenes seleccionadas
-  constructor() {}
+  constructor(private readonly _toastService:ToastService) {}
 
   ngOnInit() {}
 
   onFormSubmit(formData: any) {
     if (this.selectedImages.length === 0) {
-      alert('Debes subir al menos una imagen');
+      this._toastService.presentToastError("Debe subir al menos una imagen")
       return;
     }
     const form=new FormData()

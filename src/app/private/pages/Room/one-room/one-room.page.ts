@@ -64,6 +64,8 @@ export default class OneRoomPage {
   // Métodos para manejar acciones
   onEdit() {
     console.log('Editar habitación');
+    this._router.navigate([`/dashboard/room/edit/${this.room.id}`]);
+
   }
 
   onDelete() {
