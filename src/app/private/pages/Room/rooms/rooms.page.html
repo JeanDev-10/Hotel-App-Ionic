@@ -1,13 +1,12 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>rooms</ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- room-list.component.html -->
+<app-navbar title='Habitaciones' />
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">rooms</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<app-room-filter (filterChange)="onFilterChange($event)" />
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let room of filteredRooms">
+      <app-room-card [room]="room" [routerLink]="'/dashboard/room/'+room.id" />
+    </ion-item>
+  </ion-list>
 </ion-content>
