@@ -14,7 +14,7 @@
 
     <ion-card-content>
       <p><strong>Descripción:</strong> {{ room.description }}</p>
-      <p><strong>Precio por noche:</strong> ${{ room.price }}</p>
+      <p><strong>Precio por noche:</strong> <ion-text color="success">${{ room.price }}</ion-text></p>
     </ion-card-content>
   </ion-card>
   <app-room-actions

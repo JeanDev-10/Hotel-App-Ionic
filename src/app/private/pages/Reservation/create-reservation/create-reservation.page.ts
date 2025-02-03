@@ -3,13 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../../../../shared/components/navbar/navbar.component';
+import { RoomGalleryComponent } from "../../Room/components/room-gallery/room-gallery.component";
 
 @Component({
   selector: 'app-create-reservation',
   templateUrl: './create-reservation.page.html',
   styleUrls: ['./create-reservation.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, NavbarComponent],
+  imports: [IonicModule, CommonModule, FormsModule, NavbarComponent, RoomGalleryComponent],
 })
 export default class CreateReservationPage implements OnInit {
   room: any = {
@@ -23,18 +24,6 @@ export default class CreateReservationPage implements OnInit {
       name: 'Estándar',
     },
     images: [
-      {
-        id: 11,
-        url: 'https://hotelvictoriachone.com/wp-content/uploads/2022/12/HABITACION-MATRIMONIAL-2-HOTEL-VICTORIA-CHONE-1750x1000.jpg',
-        public_id: 'asdsada',
-        room_id: 3,
-      },
-      {
-        id: 11,
-        url: 'https://hotelvictoriachone.com/wp-content/uploads/2022/12/HABITACION-MATRIMONIAL-2-HOTEL-VICTORIA-CHONE-1750x1000.jpg',
-        public_id: 'asdsada',
-        room_id: 3,
-      },
       {
         id: 11,
         url: 'https://hotelvictoriachone.com/wp-content/uploads/2022/12/HABITACION-MATRIMONIAL-2-HOTEL-VICTORIA-CHONE-1750x1000.jpg',

@@ -1,12 +1,18 @@
 <ion-list>
   @for (reservation of reservations; track reservation.id;let index=$index) {
 
-  <ion-item [routerLink]="'/dashboard/reservation/'+reservation.id" >
-    <ion-card >
-      <ion-card-header >
-        <ion-card-title>Reservación #{{ index+1 }}</ion-card-title>
+  <ion-item [routerLink]="'/dashboard/reservation/' + reservation.id">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Reservación #{{ index + 1 }}</ion-card-title>
         <ion-card-subtitle>
-          <strong>Estado: </strong> <ion-text [color]="reservation.status_reservation.id==3?'danger':'warning'">{{ reservation.status_reservation.name }}</ion-text>
+          <strong>Estado: </strong>
+          <ion-text
+            [color]="
+              reservation.status_reservation.id == 3 ? 'danger' : 'warning'
+            "
+            >{{ reservation.status_reservation.name }}</ion-text
+          >
         </ion-card-subtitle>
       </ion-card-header>
 
@@ -25,7 +31,10 @@
           <strong>Fecha de fin:</strong>
           {{ reservation.date_end | date : "fullDate" }}
         </p>
-        <p><strong>Precio total:</strong> ${{ reservation.price_total }}</p>
+        <p>
+          <strong>Precio total:</strong>
+          <ion-text color="success">${{ reservation.price_total }}</ion-text>
+        </p>
 
         <!-- Información del usuario (solo para admin) -->
         @if(showUserInfo){
