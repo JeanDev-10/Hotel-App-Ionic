@@ -28,8 +28,8 @@ export class RoomActionsComponent {
 
   async onDelete () {
     const alert = await this._alertController.create({
-      header: 'Detalle de contacto',
-      message: '¿Estás seguro de eliminar este contacto?',
+      header: 'Detalle de Habitación',
+      message: '¿Estás seguro de eliminar esta habitación?',
       buttons: [
         {
           text: 'Sí',
