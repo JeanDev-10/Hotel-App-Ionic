@@ -46,9 +46,7 @@ export default class LoginPage implements OnInit {
           console.log(data)
           this._router.navigateByUrl('/dashboard');
         },
-        error:(error)=>{
-          console.log(error)
-        }
+
       })
     } else {
       /**

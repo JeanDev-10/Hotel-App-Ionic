@@ -21,15 +21,20 @@ export const AuthTokenInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((err) => {
       console.error(err);
       if (err.status === 401) {
-        toastService.presentToastError('No autenticado');
+        toastService.presentToastError(err.error.message);
         localStorageService.removeToken();
         router.navigate(['/auth/login']);
       } else if (err.status === 403) {
         toastService.presentToastError('No autorizado');
         location.back(); // Regresa a la ruta anterior
       } else if (err.status === 422) {
+        const errorMessages = err.error.errors
+          .map((e: any) => e.msg) // Extrae los mensajes de error
+          .join('\n'); // Une los mensajes con un salto de línea
+
         toastService.presentToastError(
-          'Existen errores de validación en los datos proporcionados'
+          errorMessages ||
+            'Existen errores de validación en los datos proporcionados'
         );
       }
       throw err;
