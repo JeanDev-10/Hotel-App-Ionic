@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { hasRoleGuard } from 'src/app/core/guards/hasRole.guard';
+import { OneRoomResolver } from 'src/app/core/resolvers/room/OneRoom.resolver';
 import { RoomsResolver } from 'src/app/core/resolvers/room/Room.resolver';
 import { RolesEnum } from 'src/app/core/utils/Roles.enum';
 
@@ -30,6 +31,7 @@ export default[
   {
     path: ':id',
     pathMatch:'full',
+    resolve: { oneRoom: OneRoomResolver },
     title: 'Detalle de Habitación',
     loadComponent: () =>
       import('./one-room/one-room.page')
