@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { addCircle, addCircleOutline } from 'ionicons/icons';
+import { HasRoleDirective } from 'src/app/core/directives/hasRole.directive';
 
 @Component({
   selector: 'app-rooms',
@@ -20,6 +21,7 @@ import { addCircle, addCircleOutline } from 'ionicons/icons';
     RoomCardComponent,
     CommonModule,
     RouterModule,
+    HasRoleDirective
   ],
 })
 export default class RoomsPage implements OnInit {

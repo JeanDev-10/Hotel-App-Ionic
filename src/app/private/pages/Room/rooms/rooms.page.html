@@ -4,14 +4,14 @@
 <app-room-filter (filterChange)="onFilterChange($event)" />
 
 <ion-content class="ion-padding">
-  <ion-button
+  <ion-button *hasRole="'Admin'"
     size="small"
     routerLink="/dashboard/room/create"
     color="dark"
     shape="round"
     class="button__create__room"
   >
-    <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+    <ion-icon  slot="start" name="add-circle-outline"></ion-icon>
     Crear habitación
   </ion-button>
   <ion-list>
