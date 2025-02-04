@@ -7,6 +7,8 @@ import { NavbarComponent } from '../../../../shared/components/navbar/navbar.com
 import { ProfileComponent } from "../components/profile/profile.component";
 import { ChangePasswordComponent } from "../components/change-password/change-password.component";
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { ToastService } from 'src/app/core/services/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-profile',
@@ -17,6 +19,8 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export default class MyProfilePage implements OnInit {
   private readonly _authService=inject(AuthService);
+  private readonly _router=inject(Router);
+  private readonly _toastService=inject(ToastService);
   segment: string = 'profile';
   user!:any;
 
@@ -45,5 +49,13 @@ export default class MyProfilePage implements OnInit {
     })
   }
 
+  logout(){
+    this._authService.logout().subscribe({
+      next:()=>{
+        this._router.navigateByUrl('/auth/login')
+        this._toastService.presentToastSucess("Cierre de sesión exitoso!")
+      }
+    })
+  }
   ngOnInit() {}
 }

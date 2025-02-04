@@ -30,7 +30,9 @@ export default class LoginPage implements OnInit {
     this.registerIcons();
     this.registerLoginForm();
   }
-
+  ionViewDidLeave(){
+    this.loginForm.reset();
+  }
   SeePassword() {
     this.IsPassword = !this.IsPassword;
   }

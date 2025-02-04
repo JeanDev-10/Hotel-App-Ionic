@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   logout() {
-    return this._http.post(`${this.apiUrl}logout`, {}).pipe(
+    return this._http.get(`${this.apiUrl}logout`, {}).pipe(
       tap((response: any) => {
         this._localStorage.removeToken();
         localStorage.removeItem(this.userKey);

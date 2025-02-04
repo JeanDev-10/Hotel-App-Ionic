@@ -16,7 +16,7 @@
     <div class="profile-container">
       <app-profile [user]="user" />
       <div>
-        <ion-button expand="block" fill="outline" color="danger"
+        <ion-button (click)="logout()" expand="block" fill="outline" color="danger"
           >Cerrar Sesión</ion-button
         >
       </div>
