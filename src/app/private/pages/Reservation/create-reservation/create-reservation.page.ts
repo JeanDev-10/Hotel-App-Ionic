@@ -1,10 +1,12 @@
 import { IonicModule } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../../../../shared/components/navbar/navbar.component';
 import { RoomGalleryComponent } from '../../Room/components/room-gallery/room-gallery.component';
 import { ToastService } from 'src/app/core/services/toast.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ReservationService } from 'src/app/core/services/reservation.service';
 
 @Component({
   selector: 'app-create-reservation',
@@ -20,45 +22,10 @@ import { ToastService } from 'src/app/core/services/toast.service';
   ],
 })
 export default class CreateReservationPage implements OnInit {
-  room: any = {
-    id: 3,
-    name: 'asdasd',
-    description: 'asdasdas',
-    price: 22,
-    type_id: 1,
-    types_room: {
-      id: 1,
-      name: 'Estándar',
-    },
-    images: [
-      {
-        id: 11,
-        url: 'https://hotelvictoriachone.com/wp-content/uploads/2022/12/HABITACION-MATRIMONIAL-2-HOTEL-VICTORIA-CHONE-1750x1000.jpg',
-        public_id: 'asdsada',
-        room_id: 3,
-      },
-      {
-        id: 11,
-        url: 'https://hotelvictoriachone.com/wp-content/uploads/2022/12/HABITACION-MATRIMONIAL-2-HOTEL-VICTORIA-CHONE-1750x1000.jpg',
-        public_id: 'asdsada',
-        room_id: 3,
-      },
-    ],
-    reservations: [
-      {
-        date_start: '2025-01-30T22:16:45.000Z',
-        date_end: '2025-01-30T22:16:45.000Z',
-      },
-      {
-        date_start: '2025-01-30T22:16:45.000Z',
-        date_end: '2025-01-30T22:16:45.000Z',
-      },
-      {
-        date_start: '2025-01-30T22:16:45.000Z',
-        date_end: '2025-01-30T22:16:45.000Z',
-      },
-    ],
-  };
+  private route = inject(ActivatedRoute);
+  private _reservationService = inject(ReservationService);
+  private _router = inject(Router);
+  room = this.route.snapshot.data['oneRoom'].room;
   dateStart!: string; // Fecha de inicio
   dateEnd!: string; // Fecha de fin
   totalPrice: number = 0;
@@ -80,7 +47,9 @@ export default class CreateReservationPage implements OnInit {
     ).toISOString();
     this.minEndDate = today;
   }
-
+  ionViewDidLeave(){
+    this.resetValues();
+  }
   // Validar el formulario
   isFormValid(): boolean {
     return !!this.dateStart && !!this.dateEnd && this.dateEnd > this.dateStart;
@@ -89,7 +58,7 @@ export default class CreateReservationPage implements OnInit {
   // Crear reservación
   createReservation() {
     if (!this.isFormValid()) {
-      return;
+      this._toastService.presentToastError("Formulario invalido!")
     }
 
     const reservationData = {
@@ -97,6 +66,14 @@ export default class CreateReservationPage implements OnInit {
       date_start: this.dateStart,
       date_end: this.dateEnd,
     };
+  this._reservationService.createReservation(reservationData).subscribe({
+    next:()=>{
+      this._router.navigateByUrl("/dashboard/reservation/me")
+      this._toastService.presentToastSucess('Reserva creada con exito!');
+      this.resetValues()
+
+    }
+  })
     console.log(reservationData);
   }
   calculateTotalPrice() {
@@ -117,5 +94,14 @@ export default class CreateReservationPage implements OnInit {
     } else {
       this.totalPrice = 0;
     }
+  }
+  resetValues(){
+    this.dateStart=""; // Fecha de inicio
+  this.dateEnd="" // Fecha de fin
+  this.totalPrice = 0;
+  // Fechas mínimas y máximas para los calendarios
+  this.minStartDate="";
+  this.maxStartDate="";
+  this.minEndDate="";
   }
 }

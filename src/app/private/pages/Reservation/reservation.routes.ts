@@ -2,6 +2,7 @@ import { add } from 'ionicons/icons';
 import { Routes } from '@angular/router';
 import { hasRoleGuard } from 'src/app/core/guards/hasRole.guard';
 import { RolesEnum } from 'src/app/core/utils/Roles.enum';
+import { OneRoomResolver } from 'src/app/core/resolvers/room/OneRoom.resolver';
 
 export default [
   {
@@ -20,6 +21,7 @@ export default [
   {
     path: 'create/:id',
     pathMatch: 'full',
+    resolve: { oneRoom: OneRoomResolver },
     title: 'Crear reservación',
     canActivate: [hasRoleGuard(RolesEnum.USER)],
     loadComponent: () => import('./create-reservation/create-reservation.page'),
