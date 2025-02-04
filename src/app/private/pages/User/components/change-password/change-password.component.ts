@@ -28,7 +28,9 @@ export class ChangePasswordComponent {
     this.registerPasswordForm();
     this.registerIcons();
   }
-
+  ionViewDidLeave(){
+    this.PasswordForm.reset();
+  }
   private registerIcons() {
     addIcons({
       personOutline,
@@ -103,6 +105,9 @@ export class ChangePasswordComponent {
         },
         error: (error:any) => {
           console.error(error);
+          if(error.status==400){
+            this.toastService.presentToastError(error.error.message)
+          }
         },
       });
     } else {
