@@ -15,8 +15,17 @@
     Crear habitación
   </ion-button>
   <ion-list>
-    <ion-item *ngFor="let room of filteredRooms">
-      <app-room-card [room]="room" [routerLink]="'/dashboard/room/'+room.id" />
-    </ion-item>
+    @for(room of filteredRooms; track room.id){
+      <ion-item >
+        <app-room-card [room]="room" [routerLink]="'/dashboard/room/'+room.id" />
+      </ion-item>
+    }
+    @empty{
+      <ion-item >
+        <ion-text color="dark" class="ion-text-center">
+          <h1>No existen habitaciones creadas</h1>
+        </ion-text>
+      </ion-item>
+    }
   </ion-list>
 </ion-content>

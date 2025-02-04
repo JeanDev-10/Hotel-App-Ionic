@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
 import { hasRoleGuard } from 'src/app/core/guards/hasRole.guard';
+import { RoomsResolver } from 'src/app/core/resolvers/room/Room.resolver';
 import { RolesEnum } from 'src/app/core/utils/Roles.enum';
 
 export default[
   {
     path: '',
+    resolve: { rooms: RoomsResolver },
     title:'Rooms',
     loadComponent: () =>
       import('./rooms/rooms.page'),
