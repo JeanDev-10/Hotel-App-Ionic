@@ -52,9 +52,8 @@
   </ion-card>
 
   <!-- Información del usuario -->
-  @if(isAdmin){
 
-  <ion-card>
+  <ion-card *hasRole="'Admin'">
     <ion-card-header>
       <ion-card-title>Información del Usuario</ion-card-title>
     </ion-card-header>
@@ -77,18 +76,20 @@
       </div>
     </ion-card-content>
   </ion-card>
-  }
 
   <!-- Botón para cancelar reservación (solo si está pendiente) -->
-  @if(reservation.status_id === 1 && isAdmin==false){
-  <div class="button-reserva">
-    <ion-button
-      fill="outline"
-      color="danger"
-      (click)="cancelReservation(reservation.id)"
-    >
-      Cancelar Reservación
-    </ion-button>
-  </div>
-  } }
+  <ng-container *hasRole="'Client'">
+    @if(reservation.status_id === 1 ){
+    <div class="button-reserva">
+      <ion-button
+        fill="outline"
+        color="danger"
+        (click)="cancelReservation(reservation.id)"
+      >
+        Cancelar Reservación
+      </ion-button>
+    </div>
+    }
+  </ng-container>
+  }
 </ion-content>

@@ -6,16 +6,16 @@ import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../../../../shared/components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { RoomGalleryComponent } from "../../Room/components/room-gallery/room-gallery.component";
+import { HasRoleDirective } from 'src/app/core/directives/hasRole.directive';
 
 @Component({
   selector: 'app-one-reservation',
   templateUrl: './one-reservation.page.html',
   styleUrls: ['./one-reservation.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, NavbarComponent, RouterModule, RoomGalleryComponent],
+  imports: [IonicModule, CommonModule, FormsModule, NavbarComponent, RouterModule, RoomGalleryComponent,HasRoleDirective],
 })
 export default class OneReservationPage implements OnInit {
-  isAdmin:boolean=true;
   reservation = {
     id: 2,
     date_start: '2025-01-30T22:16:45.000Z',

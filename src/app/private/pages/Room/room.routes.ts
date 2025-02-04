@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { hasRoleGuard } from 'src/app/core/guards/hasRole.guard';
+import { RolesEnum } from 'src/app/core/utils/Roles.enum';
 
 export default[
   {
@@ -11,12 +13,14 @@ export default[
     path: 'create',
     pathMatch:'full',
     title: 'Crear Habitación',
+    canActivate:[hasRoleGuard(RolesEnum.ADMIN)],
     loadComponent: () =>
       import('./create-room/create-room.page')
   },
   {
     path: 'edit/:id',
     pathMatch:'full',
+    canActivate:[hasRoleGuard(RolesEnum.ADMIN)],
     title: 'Editar Habitación',
     loadComponent: () =>
       import('./edit-room/edit-room.page')

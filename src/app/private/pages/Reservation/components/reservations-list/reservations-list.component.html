@@ -38,11 +38,13 @@
 
         <!-- Información del usuario (solo para admin) -->
         @if(showUserInfo){
-        <p>
-          <strong>Usuario:</strong> {{ reservation.user.name }}
-          {{ reservation.user.lastname }}
-        </p>
-        <p><strong>Email:</strong> {{ reservation.user.email }}</p>
+        <ng-container *hasRole="'Admin'">
+          <p>
+            <strong>Usuario:</strong> {{ reservation.user.name }}
+            {{ reservation.user.lastname }}
+          </p>
+          <p><strong>Email:</strong> {{ reservation.user.email }}</p>
+        </ng-container>
         }
       </ion-card-content>
     </ion-card>

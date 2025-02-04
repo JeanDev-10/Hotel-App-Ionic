@@ -60,7 +60,6 @@ export default class OneRoomPage {
       },
     ],
   };
-  isAdmin: boolean = false; // Indica si el usuario es admin
   // Métodos para manejar acciones
   onEdit() {
     console.log('Editar habitación');

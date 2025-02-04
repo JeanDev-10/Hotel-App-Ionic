@@ -4,7 +4,11 @@
       <ion-icon  name="home-sharp"></ion-icon>
       <ion-label></ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="reservation" routerLink="/dashboard/reservation" routerDirection="root">
+    <ion-tab-button tab="reservation" *hasRole="'Admin'"  routerLink="/dashboard/reservation" routerDirection="root">
+      <ion-icon name="calendar-sharp"></ion-icon>
+      <ion-label></ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="reservation/me" *hasRole="'Client'"  routerLink="/dashboard/reservation/me" routerDirection="root">
       <ion-icon name="calendar-sharp"></ion-icon>
       <ion-label></ion-label>
     </ion-tab-button>

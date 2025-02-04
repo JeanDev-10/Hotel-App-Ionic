@@ -1,17 +1,17 @@
 <!-- room-actions.component.html -->
 <ion-grid>
   <ion-row>
-    <ion-col *ngIf="isAdmin">
+    <ion-col *hasRole="'Admin'">
       <ion-button expand="block" color="warning" (click)="onEdit()">
         Editar
       </ion-button>
     </ion-col>
-    <ion-col *ngIf="isAdmin">
+    <ion-col *hasRole="'Admin'">
       <ion-button expand="block" color="danger" (click)="onDelete()">
         Eliminar
       </ion-button>
     </ion-col>
-    <ion-col *ngIf="!isAdmin">
+    <ion-col *hasRole="'Client'">
       <ion-button expand="block" color="success" (click)="onReserve()">
         Reservar
       </ion-button>

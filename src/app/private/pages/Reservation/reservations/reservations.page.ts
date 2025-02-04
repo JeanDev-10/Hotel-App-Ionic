@@ -57,7 +57,6 @@ export default class ReservationsPage implements OnInit {
     // Más reservaciones...
   ];
 
-  isAdmin: boolean = true; // Cambiar a false para el cliente
   constructor() { }
 
   ngOnInit() {
