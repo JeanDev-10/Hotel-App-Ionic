@@ -35,7 +35,9 @@ export default class RegisterPage implements OnInit {
     this.registerIcons();
     this.registerRegisterForm();
   }
-
+  ionViewDidLeave(){
+    this.registerForm.reset();
+  }
 
   SeePassword() {
       this.IsPassword = !this.IsPassword;
