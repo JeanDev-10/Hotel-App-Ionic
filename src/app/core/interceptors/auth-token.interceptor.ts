@@ -10,7 +10,7 @@ export const AuthTokenInterceptor: HttpInterceptorFn = (req, next) => {
   const localStorageService = inject(LocalStorageService);
   const router = inject(Router);
   const location = inject(Location);
-  const toastService=inject(ToastService)
+  const toastService = inject(ToastService);
   const token = localStorageService.getToken();
 
   const authReq = token
@@ -19,15 +19,18 @@ export const AuthTokenInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(authReq).pipe(
     catchError((err) => {
-      console.error(err)
+      console.error(err);
       if (err.status === 401) {
-        toastService.presentToastError("No autenticado")
+        toastService.presentToastError('No autenticado');
         localStorageService.removeToken();
         router.navigate(['/auth/login']);
-      }
-      else if (err.status === 403) {
-        toastService.presentToastError("No autorizado")
+      } else if (err.status === 403) {
+        toastService.presentToastError('No autorizado');
         location.back(); // Regresa a la ruta anterior
+      } else if (err.status === 422) {
+        toastService.presentToastError(
+          'Existen errores de validación en los datos proporcionados'
+        );
       }
       throw err;
     })

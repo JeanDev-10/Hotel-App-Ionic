@@ -14,14 +14,17 @@ export const PRIVATE_ROUTES: Routes = [
       {
         path: 'room',
         loadChildren: () => import('./pages/Room/room.routes'),
+        data: { reuse: false } // Deshabilita el caché
       },
       {
         path: 'reservation',
         loadChildren: () => import('./pages/Reservation/reservation.routes'),
+        data: { reuse: false } // Deshabilita el caché
       },
       {
         path: 'profile',
         loadChildren: () => import('./pages/User/user.routes'),
+        data: { reuse: false } // Deshabilita el cachéw
       },
     ],
   },

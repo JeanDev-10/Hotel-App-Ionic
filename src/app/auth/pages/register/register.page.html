@@ -95,7 +95,7 @@
         } @if(getformHasError('password','minlength') &&
         getFormHasTouch('password')){
         <ion-note color="danger">
-          Contraseña debe tener mínimo 3 caracteres
+          Contraseña debe tener mínimo 6 caracteres
         </ion-note>
 
         } @if(getformHasError('password','maxlength') &&
@@ -111,7 +111,7 @@
         <ion-text color="secondary" routerLink="/auth/login">
           <p>¿Ya tienes cuenta?</p>
         </ion-text>
-        <ion-button color="warning" fill="outline" type="submit">
+        <ion-button color="warning" fill="outline" type="submit"  [disabled]="registerForm.invalid">
           <ion-icon name="person-add-outline"></ion-icon>
           Registrarse
         </ion-button>
