@@ -1,3 +1,4 @@
+import { RoomService } from './../../../../core/services/room.service';
 import { IonicModule } from '@ionic/angular';
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -25,7 +26,8 @@ export default class CreateReservationPage implements OnInit {
   private route = inject(ActivatedRoute);
   private _reservationService = inject(ReservationService);
   private _router = inject(Router);
-  room!:any
+  private _roomService = inject(RoomService);
+  room!: any;
   dateStart!: string; // Fecha de inicio
   dateEnd!: string; // Fecha de fin
   totalPrice: number = 0;
@@ -50,7 +52,7 @@ export default class CreateReservationPage implements OnInit {
   ionViewWillEnter() {
     this.room = this.route.snapshot.data['oneRoom'].room;
   }
-  ionViewDidLeave(){
+  ionViewDidLeave() {
     this.resetValues();
   }
   // Validar el formulario
@@ -61,7 +63,7 @@ export default class CreateReservationPage implements OnInit {
   // Crear reservación
   createReservation() {
     if (!this.isFormValid()) {
-      this._toastService.presentToastError("Formulario invalido!")
+      this._toastService.presentToastError('Formulario invalido!');
     }
 
     const reservationData = {
@@ -69,16 +71,19 @@ export default class CreateReservationPage implements OnInit {
       date_start: this.dateStart,
       date_end: this.dateEnd,
     };
-  this._reservationService.createReservation(reservationData).subscribe({
-    next:()=>{
-      this._router.navigateByUrl("/dashboard/reservation/me")
-      this._toastService.presentToastSucess('Reserva creada con exito!');
-      this.resetValues()
-    },
-    error:(error)=>{
-      console.error('Error:', error);
-    }
-  })
+    this._reservationService.createReservation(reservationData).subscribe({
+      next: () => {
+        this._router.navigateByUrl('/dashboard/reservation/me');
+        this._toastService.presentToastSucess('Reserva creada con exito!');
+        this.resetValues();
+      },
+      error: (error) => {
+        if (error.error.message=="La habitación ya está reservada en ese rango de fechas") {
+          this.getRoom()
+        }
+        console.error('Error:', error);
+      },
+    });
     console.log(reservationData);
   }
   calculateTotalPrice() {
@@ -100,13 +105,20 @@ export default class CreateReservationPage implements OnInit {
       this.totalPrice = 0;
     }
   }
-  resetValues(){
-    this.dateStart=""; // Fecha de inicio
-  this.dateEnd="" // Fecha de fin
-  this.totalPrice = 0;
-  // Fechas mínimas y máximas para los calendarios
-  this.minStartDate="";
-  this.maxStartDate="";
-  this.minEndDate="";
+  resetValues() {
+    this.dateStart = ''; // Fecha de inicio
+    this.dateEnd = ''; // Fecha de fin
+    this.totalPrice = 0;
+    // Fechas mínimas y máximas para los calendarios
+    this.minStartDate = '';
+    this.maxStartDate = '';
+    this.minEndDate = '';
+  }
+  getRoom(){
+    this._roomService.getRoomById(this.room.id).subscribe({
+      next:(data:any)=>{
+        this.room=data.room
+      }
+    })
   }
 }

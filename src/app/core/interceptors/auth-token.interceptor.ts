@@ -31,14 +31,20 @@ export const AuthTokenInterceptor: HttpInterceptorFn = (req, next) => {
         toastService.presentToastError('No autorizado');
         location.back(); // Regresa a la ruta anterior
       } else if (err.status === 422) {
-        const errorMessages = err.error.errors
+        if(err.error.errors){
+          const errorMessages = err.error.errors
           .map((e: any) => e.msg) // Extrae los mensajes de error
           .join('\n'); // Une los mensajes con un salto de línea
-
-        toastService.presentToastError(
-          errorMessages ||
+          toastService.presentToastError(
+            errorMessages ||
             'Existen errores de validación en los datos proporcionados'
-        );
+          );
+        }
+        if(err.error.message){
+          toastService.presentToastError(
+            err.error.message
+          );
+        }
       }else if(err.status==400){
         toastService.presentToastError(err.error.message)
       }

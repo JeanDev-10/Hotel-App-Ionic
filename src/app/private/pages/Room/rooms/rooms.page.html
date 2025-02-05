@@ -21,11 +21,11 @@
       <app-room-card [room]="room" [routerLink]="'/dashboard/room/'+room.id" />
     </ion-item>
     } @empty{
-    <ion-item>
-      <ion-text color="dark" class="ion-text-center">
-        <h1>No existen habitaciones creadas</h1>
-      </ion-text>
-    </ion-item>
+    <ion-card>
+      <ion-card-content>
+        <ion-text color="medium">No hay habitaciones registradas.</ion-text>
+      </ion-card-content>
+    </ion-card>
     } }
   </ion-list>
 </ion-content>

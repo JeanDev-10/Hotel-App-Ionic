@@ -81,6 +81,11 @@ export default class RegisterPage implements OnInit {
           );
           this._router.navigateByUrl('/auth/login');
         },
+        error:(error)=>{
+          if(error.status==422){
+            this.registerForm.reset();
+          }
+        }
       });
     } else {
       this.toastService.presentToastError('¡Formulario invalido!');

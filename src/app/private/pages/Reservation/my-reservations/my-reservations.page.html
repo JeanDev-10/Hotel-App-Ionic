@@ -1,7 +1,8 @@
 <app-navbar title="Mis reservaciones" />
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  @if(reservations){
-  <app-reservation-list [reservations]="reservations" />
+  @if(filteredReservation){
+  <app-reservation-filter (filterChange)="onFilterChange($event)" />
+  <app-reservation-list [reservations]="filteredReservation" />
   }
 </ion-content>

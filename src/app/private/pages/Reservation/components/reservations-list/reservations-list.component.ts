@@ -7,7 +7,7 @@ import { HasRoleDirective } from 'src/app/core/directives/hasRole.directive';
 @Component({
   selector: 'app-reservation-list',
   standalone:true,
-  imports:[IonicModule,CommonModule,RouterModule,HasRoleDirective],
+  imports: [IonicModule, CommonModule, RouterModule, HasRoleDirective],
   templateUrl: './reservations-list.component.html',
   styleUrls: ['./reservations-list.component.scss'],
 })

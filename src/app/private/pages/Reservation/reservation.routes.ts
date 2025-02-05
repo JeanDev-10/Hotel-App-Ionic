@@ -1,4 +1,3 @@
-import { add } from 'ionicons/icons';
 import { Routes } from '@angular/router';
 import { hasRoleGuard } from 'src/app/core/guards/hasRole.guard';
 import { RolesEnum } from 'src/app/core/utils/Roles.enum';
