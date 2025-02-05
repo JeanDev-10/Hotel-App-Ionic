@@ -105,9 +105,7 @@ export class ChangePasswordComponent {
         },
         error: (error:any) => {
           console.error(error);
-          if(error.status==400){
-            this.toastService.presentToastError(error.error.message)
-          }
+
         },
       });
     } else {

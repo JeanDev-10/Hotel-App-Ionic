@@ -24,13 +24,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export default class OneRoomPage {
   private route = inject(ActivatedRoute);
-  room = this.route.snapshot.data['oneRoom'].room;
+  room!:any
   constructor(private readonly _router: Router) {}
   onEdit() {
     console.log('Editar habitación');
     this._router.navigate([`/dashboard/room/edit/${this.room.id}`]);
   }
-
+  ionViewWillEnter() {
+    this.room = this.route.snapshot.data['oneRoom'].room;
+  }
   onDelete() {
     console.log('Eliminar habitación');
   }

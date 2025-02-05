@@ -25,7 +25,7 @@ export default class CreateReservationPage implements OnInit {
   private route = inject(ActivatedRoute);
   private _reservationService = inject(ReservationService);
   private _router = inject(Router);
-  room = this.route.snapshot.data['oneRoom'].room;
+  room!:any
   dateStart!: string; // Fecha de inicio
   dateEnd!: string; // Fecha de fin
   totalPrice: number = 0;
@@ -46,6 +46,9 @@ export default class CreateReservationPage implements OnInit {
       new Date().setFullYear(new Date().getFullYear() + 1)
     ).toISOString();
     this.minEndDate = today;
+  }
+  ionViewWillEnter() {
+    this.room = this.route.snapshot.data['oneRoom'].room;
   }
   ionViewDidLeave(){
     this.resetValues();
@@ -71,7 +74,9 @@ export default class CreateReservationPage implements OnInit {
       this._router.navigateByUrl("/dashboard/reservation/me")
       this._toastService.presentToastSucess('Reserva creada con exito!');
       this.resetValues()
-
+    },
+    error:(error)=>{
+      console.error('Error:', error);
     }
   })
     console.log(reservationData);

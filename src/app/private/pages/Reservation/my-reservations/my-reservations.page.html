@@ -1,5 +1,7 @@
 <app-navbar title="Mis reservaciones" />
 
 <ion-content [fullscreen]="true" class="ion-padding">
+  @if(reservations){
   <app-reservation-list [reservations]="reservations" />
+  }
 </ion-content>

@@ -1,26 +1,31 @@
 <app-navbar title="Habitación" hrefDefault="/dashboard/room" />
 
 <ion-content [fullscreen]="true" class="ion-padding">
+  @if(room){
   <div class="content">
-     <!-- Galería de imágenes -->
-  <app-room-gallery [images]="room.images"></app-room-gallery>
+    <!-- Galería de imágenes -->
+    <app-room-gallery [images]="room.images"></app-room-gallery>
 
-  <!-- Información de la habitación -->
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>{{ room.name }}</ion-card-title>
-      <ion-card-subtitle>{{ room.types_room.name }}</ion-card-subtitle>
-    </ion-card-header>
+    <!-- Información de la habitación -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ room.name }}</ion-card-title>
+        <ion-card-subtitle>{{ room.types_room.name }}</ion-card-subtitle>
+      </ion-card-header>
 
-    <ion-card-content>
-      <p><strong>Descripción:</strong> {{ room.description }}</p>
-      <p><strong>Precio por noche:</strong> <ion-text color="success">${{ room.price }}</ion-text></p>
-    </ion-card-content>
-  </ion-card>
-  <app-room-actions
-    (edit)="onEdit()"
-    (delete)="onDelete()"
-    (reserve)="onReserve()"
-  ></app-room-actions>
+      <ion-card-content>
+        <p><strong>Descripción:</strong> {{ room.description }}</p>
+        <p>
+          <strong>Precio por noche:</strong>
+          <ion-text color="success">${{ room.price }}</ion-text>
+        </p>
+      </ion-card-content>
+    </ion-card>
+    <app-room-actions
+      (edit)="onEdit()"
+      (delete)="onDelete()"
+      (reserve)="onReserve()"
+    ></app-room-actions>
   </div>
+  }
 </ion-content>

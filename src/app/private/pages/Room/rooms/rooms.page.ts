@@ -26,12 +26,15 @@ import { HasRoleDirective } from 'src/app/core/directives/hasRole.directive';
 })
 export default class RoomsPage implements OnInit {
   private route = inject(ActivatedRoute);
-  rooms = this.route.snapshot.data['rooms'].data;
-  filteredRooms=this.rooms;
+  rooms!: any;
+  filteredRooms!:any
   constructor() {
     this.registerIcons();
   }
-
+  ionViewWillEnter() {
+    this.rooms = this.route.snapshot.data['rooms'].data;
+    this.filteredRooms = this.rooms;
+  }
   ngOnInit() {}
   onFilterChange(type: string) {
     if (type) {

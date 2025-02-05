@@ -1,6 +1,8 @@
 <app-navbar title="Crear reservación" hrefDefault="/dashboard/room" />
 
 <ion-content class="ion-padding">
+  @if(room){
+
   <!-- Información de la habitación -->
   <ion-card>
     <ion-card-header>
@@ -10,7 +12,10 @@
 
     <ion-card-content>
       <p><strong>Descripción:</strong> {{ room.description }}</p>
-      <p><strong>Precio por noche:</strong> <ion-text color="success">${{ room.price}}</ion-text></p>
+      <p>
+        <strong>Precio por noche:</strong>
+        <ion-text color="success">${{ room.price}}</ion-text>
+      </p>
 
       <app-room-gallery [images]="room.images" />
     </ion-card-content>
@@ -79,4 +84,5 @@
       Crear Reservación
     </ion-button>
   </div>
+  }
 </ion-content>

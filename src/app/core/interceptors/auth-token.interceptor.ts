@@ -36,6 +36,8 @@ export const AuthTokenInterceptor: HttpInterceptorFn = (req, next) => {
           errorMessages ||
             'Existen errores de validación en los datos proporcionados'
         );
+      }else if(err.status==400){
+        toastService.presentToastError(err.error.message)
       }
       throw err;
     })

@@ -23,8 +23,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export default class MyReservationsPage implements OnInit {
   private route = inject(ActivatedRoute);
-  reservations = this.route.snapshot.data['reservations'].data;
+  reservations!:any
 
+  ionViewWillEnter() {
+    this.reservations = this.route.snapshot.data['reservations'].data;
+  }
   constructor() {}
 
   ngOnInit() {}
