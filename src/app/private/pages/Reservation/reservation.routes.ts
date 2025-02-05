@@ -5,6 +5,7 @@ import { RolesEnum } from 'src/app/core/utils/Roles.enum';
 import { OneRoomResolver } from 'src/app/core/resolvers/room/OneRoom.resolver';
 import { ReservationsResolver } from 'src/app/core/resolvers/reservation/Reservations.resolver';
 import { MyReservationsResolver } from 'src/app/core/resolvers/reservation/MyReservations.resolver';
+import { OneReservationResolver } from 'src/app/core/resolvers/reservation/OneReservation.resolver';
 
 export default [
   {
@@ -36,6 +37,9 @@ export default [
   },
   {
     path: ':id',
+    resolve:{
+      reservation:OneReservationResolver
+    },
     title: 'Detalle de Reserva',
     loadComponent: () => import('./one-reservation/one-reservation.page'),
   },
