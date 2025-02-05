@@ -3,12 +3,16 @@ import { Routes } from '@angular/router';
 import { hasRoleGuard } from 'src/app/core/guards/hasRole.guard';
 import { RolesEnum } from 'src/app/core/utils/Roles.enum';
 import { OneRoomResolver } from 'src/app/core/resolvers/room/OneRoom.resolver';
+import { ReservationsResolver } from 'src/app/core/resolvers/reservation/Reservations.resolver';
 
 export default [
   {
     path: '',
     title: 'Reservations',
     canActivate: [hasRoleGuard(RolesEnum.ADMIN)],
+    resolve:{
+      reservations:ReservationsResolver
+    },
     loadComponent: () => import('./reservations/reservations.page'),
   },
   {
