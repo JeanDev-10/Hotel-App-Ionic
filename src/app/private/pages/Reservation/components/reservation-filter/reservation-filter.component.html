@@ -1,0 +1,11 @@
+<!-- room-filter.component.html -->
+<ion-toolbar>
+  <ion-segment [(ngModel)]="selectedType" (ionChange)="onFilterChange()">
+    <ion-segment-button value=""> Todas </ion-segment-button>
+    <ion-segment-button value="Pendiente" color="dark"> Pendiente </ion-segment-button>
+    <ion-segment-button value="Confirmada" color="tertiary"> Confirmada </ion-segment-button>
+    <ion-segment-button value="Cancelada" color="warning"> Cancelada </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
+
+

@@ -1,19 +1,21 @@
 import { IonicModule } from '@ionic/angular';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-room-filter',
-  standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
-  templateUrl: './room-filter.component.html',
-  styleUrls: ['./room-filter.component.scss'],
+  selector: 'app-reservation-filter',
+  standalone:true,
+  imports:[
+    CommonModule,IonicModule,FormsModule
+  ],
+  templateUrl: './reservation-filter.component.html',
+  styleUrls: ['./reservation-filter.component.scss'],
 })
-export class RoomFilterComponent {
+export class ReservationFilterComponent {
   selectedType: string; // Tipo de habitación seleccionado
 
-  constructor() {
+  constructor(){
     this.selectedType = ''; // Tipo de habitación seleccionado
   }
   @Output() filterChange = new EventEmitter<string>(); // Emite el tipo seleccionado
@@ -22,5 +24,6 @@ export class RoomFilterComponent {
   onFilterChange() {
     this.filterChange.emit(this.selectedType);
   }
+
 
 }

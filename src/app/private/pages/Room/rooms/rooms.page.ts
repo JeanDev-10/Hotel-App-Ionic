@@ -1,10 +1,15 @@
 import { IonicModule } from '@ionic/angular';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../../../../shared/components/navbar/navbar.component';
 import { RoomFilterComponent } from '../components/room-filter/room-filter.component';
 import { RoomCardComponent } from '../components/room-card/room-card.component';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterModule,
+} from '@angular/router';
 import { addIcons } from 'ionicons';
 import { addCircle, addCircleOutline } from 'ionicons/icons';
 import { HasRoleDirective } from 'src/app/core/directives/hasRole.directive';
@@ -26,15 +31,26 @@ import { HasRoleDirective } from 'src/app/core/directives/hasRole.directive';
 })
 export default class RoomsPage implements OnInit {
   private route = inject(ActivatedRoute);
+  private router=inject(Router)
   rooms!: any;
-  filteredRooms!:any
+  filteredRooms!: any;
+  @ViewChild(RoomFilterComponent)
+  roomFilter!: RoomFilterComponent;
+
   constructor() {
     this.registerIcons();
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        console.log('Cambiando de página, reseteando filtro...');
+        if (this.roomFilter) {
+          this.roomFilter.selectedType = ''; // Reiniciar filtro
+        }
+      }
+    });
   }
   ionViewWillEnter() {
     this.rooms = this.route.snapshot.data['rooms'].data;
     this.filteredRooms = this.rooms;
-
   }
 
   ngOnInit() {}
