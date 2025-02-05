@@ -24,7 +24,7 @@ export default class ReservationsPage implements OnInit {
   reservations!:any
   constructor() {}
   ionViewWillEnter() {
-    this.reservations = this.route.snapshot.data['reservation'].data;
+    this.reservations = this.route.snapshot.data['reservations'].data;
   }
 
   ngOnInit() {}

@@ -6,8 +6,10 @@ import { Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { Location } from '@angular/common';
 import { ToastService } from '../services/toast.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 export const AuthTokenInterceptor: HttpInterceptorFn = (req, next) => {
   const localStorageService = inject(LocalStorageService);
+  const authService = inject(AuthService);
   const router = inject(Router);
   const location = inject(Location);
   const toastService = inject(ToastService);
@@ -23,6 +25,7 @@ export const AuthTokenInterceptor: HttpInterceptorFn = (req, next) => {
       if (err.status === 401) {
         toastService.presentToastError(err.error.message);
         localStorageService.removeToken();
+        authService.removeUser()
         router.navigate(['/auth/login']);
       } else if (err.status === 403) {
         toastService.presentToastError('No autorizado');

@@ -28,7 +28,7 @@ export class AuthService {
     return this._http.get(`${this.apiUrl}logout`, {}).pipe(
       tap((response: any) => {
         this._localStorage.removeToken();
-        localStorage.removeItem(this.userKey);
+        this.removeUser()
       })
     );;
   }
@@ -50,5 +50,8 @@ export class AuthService {
   // Guarda los datos del usuario en localStorage
   private setUserData(user: any): void {
     localStorage.setItem(this.userKey, JSON.stringify(user));
+  }
+  removeUser(){
+    localStorage.removeItem(this.userKey);
   }
 }
