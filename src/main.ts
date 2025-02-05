@@ -20,11 +20,11 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { LOCALE_ID } from '@angular/core';
-import localeEs from '@angular/common/locales/es'
+import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { SpinnerInterceptor } from './app/core/interceptors/spinner.interceptor';
 import { AuthTokenInterceptor } from './app/core/interceptors/auth-token.interceptor';
-registerLocaleData(localeEs,'es')
+registerLocaleData(localeEs, 'es');
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -36,7 +36,10 @@ bootstrapApplication(AppComponent, {
       withPreloading(PreloadAllModules),
       withComponentInputBinding()
     ),
-    provideHttpClient(withInterceptorsFromDi(),withInterceptors([AuthTokenInterceptor])),
-    {provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true},
+    provideHttpClient(
+      withInterceptorsFromDi(),
+      withInterceptors([AuthTokenInterceptor])
+    ),
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
   ],
 });

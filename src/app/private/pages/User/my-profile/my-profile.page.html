@@ -14,12 +14,18 @@
   <!-- Contenido del Perfil -->
   <div *ngIf="segment === 'profile'">
     <div class="profile-container">
+      @if(user){
       <app-profile [user]="user" />
       <div>
-        <ion-button (click)="logout()" expand="block" fill="outline" color="danger"
+        <ion-button
+          (click)="logout()"
+          expand="block"
+          fill="outline"
+          color="danger"
           >Cerrar Sesión</ion-button
         >
       </div>
+    }
     </div>
   </div>
 

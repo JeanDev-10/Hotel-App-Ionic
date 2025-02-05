@@ -4,7 +4,7 @@ import { NavbarComponent } from '../../../../shared/components/navbar/navbar.com
 import { RoomFilterComponent } from '../components/room-filter/room-filter.component';
 import { RoomCardComponent } from '../components/room-card/room-card.component';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { addCircle, addCircleOutline } from 'ionicons/icons';
 import { HasRoleDirective } from 'src/app/core/directives/hasRole.directive';
@@ -34,7 +34,9 @@ export default class RoomsPage implements OnInit {
   ionViewWillEnter() {
     this.rooms = this.route.snapshot.data['rooms'].data;
     this.filteredRooms = this.rooms;
+
   }
+
   ngOnInit() {}
   onFilterChange(type: string) {
     if (type) {

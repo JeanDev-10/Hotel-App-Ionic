@@ -1,4 +1,5 @@
 import { Component, EnvironmentInjector, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { calendarSharp, homeSharp, personSharp } from 'ionicons/icons';
@@ -16,4 +17,5 @@ export class TabsPage {
   constructor() {
     addIcons({ homeSharp,personSharp,calendarSharp });
   }
+
 }

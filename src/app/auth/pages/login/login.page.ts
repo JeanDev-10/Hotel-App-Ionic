@@ -65,7 +65,7 @@ export default class LoginPage implements OnInit {
           console.log(data);
           this._authService.getMe().subscribe({
             next: () => {
-              this.toastService.presentToastError('Inicio de Sesión exitoso!');
+              this.toastService.presentToastSucess('Inicio de Sesión exitoso!');
               this._router.navigateByUrl('/dashboard');
             },
           });

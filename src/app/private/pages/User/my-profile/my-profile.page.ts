@@ -8,7 +8,7 @@ import { ProfileComponent } from "../components/profile/profile.component";
 import { ChangePasswordComponent } from "../components/change-password/change-password.component";
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { ToastService } from 'src/app/core/services/toast.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-profile',
@@ -21,8 +21,9 @@ export default class MyProfilePage implements OnInit {
   private readonly _authService=inject(AuthService);
   private readonly _router=inject(Router);
   private readonly _toastService=inject(ToastService);
+  private readonly _route=inject(ActivatedRoute)
   segment: string = 'profile';
-  user!:any;
+  user!:any
 
   segmentChanged(event: any) {
     this.segment = event.detail.value;
@@ -34,19 +35,7 @@ export default class MyProfilePage implements OnInit {
   * usar metodo para cargar los datos al entrar a la vista en todos las conexiones a la api
   */
   ionViewWillEnter(){
-    this.getUserData()
-  }
-
-  private getUserData(){
-    this._authService.getMe().subscribe({
-      next:(data)=>{
-        console.log(data)
-        this.user=data;
-      },
-      error:(error)=>{
-        console.log(error)
-      }
-    })
+    this.user = this._route.snapshot.data['user'];
   }
 
   logout(){
