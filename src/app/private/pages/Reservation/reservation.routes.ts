@@ -4,6 +4,7 @@ import { hasRoleGuard } from 'src/app/core/guards/hasRole.guard';
 import { RolesEnum } from 'src/app/core/utils/Roles.enum';
 import { OneRoomResolver } from 'src/app/core/resolvers/room/OneRoom.resolver';
 import { ReservationsResolver } from 'src/app/core/resolvers/reservation/Reservations.resolver';
+import { MyReservationsResolver } from 'src/app/core/resolvers/reservation/MyReservations.resolver';
 
 export default [
   {
@@ -18,6 +19,9 @@ export default [
   {
     path: 'me',
     pathMatch: 'full',
+    resolve:{
+      reservations:MyReservationsResolver
+    },
     canActivate: [hasRoleGuard(RolesEnum.USER)],
     title: 'Mis reservaciones',
     loadComponent: () => import('./my-reservations/my-reservations.page'),

@@ -35,6 +35,6 @@ export class HasRoleDirective {
   }
 
   hasRole(user: any, role:string) {
-    return user.role.name==role
+    return user?.role?.name==role
   }
 }
