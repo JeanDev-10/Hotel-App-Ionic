@@ -38,5 +38,10 @@ export class RoomFormComponent implements OnInit  {
       this.formSubmit.emit(this.roomForm.value);
     }
   }
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.roomForm.reset();
+  }
 
 }

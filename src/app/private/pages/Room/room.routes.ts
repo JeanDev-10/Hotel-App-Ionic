@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { hasRoleGuard } from 'src/app/core/guards/hasRole.guard';
 import { OneRoomResolver } from 'src/app/core/resolvers/room/OneRoom.resolver';
 import { RoomsResolver } from 'src/app/core/resolvers/room/Room.resolver';
+import { TypesRoomResolver } from 'src/app/core/resolvers/types room/typesRoom.resolver';
 import { RolesEnum } from 'src/app/core/utils/Roles.enum';
 
 export default[
@@ -16,6 +17,9 @@ export default[
     path: 'create',
     pathMatch:'full',
     title: 'Crear Habitación',
+    resolve: {
+      roomTypes: TypesRoomResolver // Nombre con el que se inyectarán los datos
+    },
     canActivate:[hasRoleGuard(RolesEnum.ADMIN)],
     loadComponent: () =>
       import('./create-room/create-room.page')

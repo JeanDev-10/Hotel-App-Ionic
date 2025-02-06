@@ -1,10 +1,8 @@
 <app-navbar title="Crear habitación" hrefDefault="/dashboard/room" />
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <app-room-form
-  [roomTypes]="roomTypes"
-  (formSubmit)="onFormSubmit($event)"
-/>
-
-<app-image-upload (imagesChange)="onImagesChange($event)" />
+  @if(roomTypes){
+  <app-room-form [roomTypes]="roomTypes" (formSubmit)="onFormSubmit($event)" />
+  <app-image-upload (imagesChange)="onImagesChange($event)" />
+  }
 </ion-content>
