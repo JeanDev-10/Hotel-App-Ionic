@@ -18,10 +18,10 @@
 
       <ion-card-content>
         <!-- Información de la reservación -->
-        <p><strong>Habitación:</strong> {{ reservation.room.name }}</p>
+        <p><strong>Habitación:</strong> {{ reservation.room?.name||'Habitación eliminada' }}</p>
         <p>
           <strong>Tipo de habitación:</strong>
-          {{ reservation.room.types_room.name }}
+          {{ reservation.room?.types_room.name || 'Desconocido' }}
         </p>
         <p>
           <strong>Fecha de inicio:</strong>

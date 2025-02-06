@@ -19,13 +19,13 @@
 
     <ion-card-content>
       <!-- Información de la habitación -->
-      <p><strong>Habitación:</strong> {{ reservation.room.name }}</p>
+      <p><strong>Habitación:</strong> {{ reservation.room?.name || 'Habitación eliminada' }}</p>
       <p>
-        <strong>Tipo de habitación:</strong> {{ reservation.room.types_room.name
+        <strong>Tipo de habitación:</strong> {{ reservation.room?.types_room.name || 'Desconocida'
         }}
       </p>
-      <p><strong>Descripción:</strong> {{ reservation.room.description }}</p>
-      <p><strong>Precio por noche:</strong> ${{ reservation.room.price }}</p>
+      <p><strong>Descripción:</strong> {{ reservation.room?.description ||'Habitación eliminada' }}</p>
+      <p><strong>Precio por noche:</strong> ${{ reservation.room?.price || 'Habitación eliminada' }}</p>
       <p>
         <strong>Precio total:</strong>
         <ion-text color="success">${{ reservation.price_total }}</ion-text>
@@ -40,14 +40,8 @@
       </p>
 
       <!-- Galería de imágenes de la habitación -->
-      <app-room-gallery [images]="reservation.room.images" />
-      <!-- <ion-grid>
-        <ion-row>
-          <ion-col size="6" *ngFor="let image of reservation.room.images">
-            <ion-img [src]="image.url" alt="Imagen de la habitación"></ion-img>
-          </ion-col>
-        </ion-row>
-      </ion-grid> -->
+      <app-room-gallery [images]="reservation.room?.images" />
+
     </ion-card-content>
   </ion-card>
 
