@@ -1,15 +1,15 @@
 <app-navbar title="Editar habitación" hrefDefault="/dashboard/room" />
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <app-room-form
+  @if(roomTypes&&room){
+    <app-room-form
     [roomTypes]="roomTypes"
     [roomData]="room"
     (formSubmit)="onFormSubmit($event)"
-  ></app-room-form>
-
-
-  <app-image-upload
+    ></app-room-form>
+    <app-image-upload
     [existingImages]="room?.images"
     (imagesChange)="onImagesChange($event)"
-  ></app-image-upload>
+    ></app-image-upload>
+  }
 </ion-content>

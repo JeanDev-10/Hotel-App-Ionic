@@ -27,6 +27,7 @@ export default[
   {
     path: 'edit/:id',
     pathMatch:'full',
+    resolve: { oneRoom: OneRoomResolver, roomTypes:TypesRoomResolver },
     canActivate:[hasRoleGuard(RolesEnum.ADMIN)],
     title: 'Editar Habitación',
     loadComponent: () =>
