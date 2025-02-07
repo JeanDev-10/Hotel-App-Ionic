@@ -27,6 +27,7 @@ export default class CreateReservationPage implements OnInit {
   private _reservationService = inject(ReservationService);
   private _router = inject(Router);
   private _roomService = inject(RoomService);
+  private _toastService = inject(ToastService);
   room!: any;
   dateStart!: string; // Fecha de inicio
   dateEnd!: string; // Fecha de fin
@@ -36,7 +37,20 @@ export default class CreateReservationPage implements OnInit {
   maxStartDate!: string;
   minEndDate!: string;
 
-  constructor(private readonly _toastService: ToastService) {}
+
+  defaultDate: string;
+  defaultEndDate: string;
+
+  constructor() {
+    const today = new Date();
+    today.setHours(8, 0, 0, 0); // Establecer 08:00 AM
+    this.defaultDate = today.toISOString();
+
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+    tomorrow.setHours(8, 0, 0, 0); // Establecer 08:00 AM en la fecha de fin
+    this.defaultEndDate = tomorrow.toISOString();
+  }
 
   ngOnInit() {
     // Obtener la habitación desde el estado de navegación
@@ -68,8 +82,8 @@ export default class CreateReservationPage implements OnInit {
 
     const reservationData = {
       room_id: this.room.id,
-      date_start: this.dateStart,
-      date_end: this.dateEnd,
+      date_start: this.formatDate(this.dateStart),
+      date_end: this.formatDate(this.dateEnd),
     };
     this._reservationService.createReservation(reservationData).subscribe({
       next: () => {
@@ -114,11 +128,15 @@ export default class CreateReservationPage implements OnInit {
     this.maxStartDate = '';
     this.minEndDate = '';
   }
-  getRoom(){
+  private getRoom(){
     this._roomService.getRoomById(this.room.id).subscribe({
       next:(data:any)=>{
         this.room=data.room
       }
     })
+  }
+   // Método para formatear la fecha en YYYY-MM-DD
+  private formatDate(date: string): string {
+    return date.split('T')[0]; // Extrae solo la parte de la fecha sin la hora
   }
 }
