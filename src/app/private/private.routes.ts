@@ -25,6 +25,16 @@ export const PRIVATE_ROUTES: Routes = [
         data: { reuse: false }, // Deshabilita el caché
       },
       {
+          path: 'reservation-me',
+          pathMatch: 'full',
+          resolve:{
+            reservations:MyReservationsResolver
+          },
+          canActivate: [hasRoleGuard(RolesEnum.USER)],
+          title: 'Mis reservaciones',
+          loadComponent: () => import('./pages/Reservation/my-reservations/my-reservations.page'),
+        },
+      {
         path: 'profile',
         loadChildren: () => import('./pages/User/user.routes'),
         data: { reuse: false }, // Deshabilita el cachéw

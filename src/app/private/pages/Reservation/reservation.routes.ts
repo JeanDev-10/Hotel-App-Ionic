@@ -16,16 +16,7 @@ export default [
     },
     loadComponent: () => import('./reservations/reservations.page'),
   },
-  {
-    path: 'me',
-    pathMatch: 'full',
-    resolve:{
-      reservations:MyReservationsResolver
-    },
-    canActivate: [hasRoleGuard(RolesEnum.USER)],
-    title: 'Mis reservaciones',
-    loadComponent: () => import('./my-reservations/my-reservations.page'),
-  },
+
   {
     path: 'create/:id',
     pathMatch: 'full',
