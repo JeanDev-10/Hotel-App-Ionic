@@ -19,15 +19,20 @@ import {
   withInterceptors,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { LOCALE_ID } from '@angular/core';
+import {  importProvidersFrom, LOCALE_ID } from '@angular/core';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { SpinnerInterceptor } from './app/core/interceptors/spinner.interceptor';
 import { AuthTokenInterceptor } from './app/core/interceptors/auth-token.interceptor';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { environment } from './environments/environment';
 registerLocaleData(localeEs, 'es');
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: LOCALE_ID, useValue: 'es' },
     provideIonicAngular(),
@@ -40,6 +45,7 @@ bootstrapApplication(AppComponent, {
       withInterceptorsFromDi(),
       withInterceptors([AuthTokenInterceptor])
     ),
-    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }, /* provideFirebaseApp(() => initializeApp(environment.firebase)), provideAuth(() => getAuth()), */
+
   ],
 });

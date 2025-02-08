@@ -6,9 +6,11 @@
     <ion-segment-button value="profile">
       <ion-label>Perfil</ion-label>
     </ion-segment-button>
+  @if(user?.registrationMethod=='local'){
     <ion-segment-button value="settings">
       <ion-label>Configuración</ion-label>
     </ion-segment-button>
+  }
   </ion-segment>
 
   <!-- Contenido del Perfil -->
@@ -29,8 +31,10 @@
     </div>
   </div>
 
-  <!-- Contenido de Configuración -->
-  <div *ngIf="segment === 'settings'" class="settings">
-    <app-change-password />
-  </div>
+  @if(user?.registrationMethod=='local'){
+    <!-- Contenido de Configuración -->
+    <div *ngIf="segment === 'settings'" class="settings">
+      <app-change-password />
+    </div>
+  }
 </ion-content>

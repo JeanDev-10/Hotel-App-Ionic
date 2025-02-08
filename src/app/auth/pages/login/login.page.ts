@@ -13,6 +13,8 @@ import {
   arrowForwardCircle,
   eyeOffOutline,
   eyeOutline,
+  logoGithub,
+  logoGoogle,
   personAddOutline,
 } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
@@ -39,7 +41,7 @@ export default class LoginPage implements OnInit {
   private toastService = inject(ToastService);
   private fb = inject(FormBuilder);
   private readonly _authService = inject(AuthService);
-  private readonly _localStorageService = inject(LocalStorageService);
+  private readonly _toastService = inject(ToastService);
   private readonly _router = inject(Router);
   IsPassword: boolean = false;
   loginForm!: FormGroup;
@@ -86,6 +88,8 @@ export default class LoginPage implements OnInit {
       eyeOutline,
       personAddOutline,
       arrowForwardCircle,
+      logoGoogle,
+      logoGithub
     });
   }
   getformHasError(field: string, rule: string): boolean | undefined {
@@ -105,6 +109,44 @@ export default class LoginPage implements OnInit {
           Validators.maxLength(20),
         ],
       ],
+    });
+  }
+ loginGoogle(){
+  this._authService.googleLogin().then((data) => {
+    console.log(data)
+    data.subscribe({
+      next:(data:any)=>{
+        console.log(data)
+        this._authService.getMe().subscribe({
+          next: () => {
+            this.toastService.presentToastSucess('Inicio de Sesión exitoso!');
+            this._router.navigateByUrl('/dashboard');
+          },
+        });
+      }
+    })
+  })
+    .catch((error) => {
+      console.log(error)
+    });
+  }
+ loginGithub(){
+  this._authService.githubLogin().then((data) => {
+    console.log(data)
+    data.subscribe({
+      next:(data:any)=>{
+        console.log(data)
+        this._authService.getMe().subscribe({
+          next: () => {
+            this.toastService.presentToastSucess('Inicio de Sesión exitoso!');
+            this._router.navigateByUrl('/dashboard');
+          },
+        });
+      }
+    })
+  })
+    .catch((error) => {
+      console.log(error)
     });
   }
 }
