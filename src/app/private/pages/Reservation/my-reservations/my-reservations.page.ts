@@ -30,6 +30,10 @@ export default class MyReservationsPage  {
   filteredReservation!: any;
   @ViewChild(ReservationFilterComponent)
   reservationFilter!: ReservationFilterComponent;
+
+  constructor() {
+    this.resetFilter()
+  }
   onFilterChange(type: string) {
     console.log(type);
     if (type) {
@@ -44,11 +48,10 @@ export default class MyReservationsPage  {
     this.reservations = this.route.snapshot.data['reservations'].data;
     this.filteredReservation = this.reservations;
   }
-  constructor() {}
   handleRefresh(event:CustomEvent){
     this.getReservations();
+    this.reservationFilter.selectedType = ''; // Reiniciar filtro
     (event.target as HTMLIonRefresherElement).complete();
-    this.resetFilter()
   }
   private getReservations() {
     this._reservationService.getMyReservations().subscribe({
