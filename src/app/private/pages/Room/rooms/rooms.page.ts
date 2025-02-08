@@ -13,6 +13,7 @@ import {
 import { addIcons } from 'ionicons';
 import { addCircle, addCircleOutline } from 'ionicons/icons';
 import { HasRoleDirective } from 'src/app/core/directives/hasRole.directive';
+import { RoomService } from 'src/app/core/services/room.service';
 
 @Component({
   selector: 'app-rooms',
@@ -32,6 +33,7 @@ import { HasRoleDirective } from 'src/app/core/directives/hasRole.directive';
 export default class RoomsPage implements OnInit {
   private route = inject(ActivatedRoute);
   private router=inject(Router)
+  private _roomService=inject(RoomService)
   rooms!: any;
   filteredRooms!: any;
   @ViewChild(RoomFilterComponent)
@@ -39,20 +41,17 @@ export default class RoomsPage implements OnInit {
 
   constructor() {
     this.registerIcons();
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        console.log('Cambiando de página, reseteando filtro...');
-        if (this.roomFilter) {
-          this.roomFilter.selectedType = ''; // Reiniciar filtro
-        }
-      }
-    });
+    this.resetFilter()
   }
   ionViewWillEnter() {
     this.rooms = this.route.snapshot.data['rooms'].data;
     this.filteredRooms = this.rooms;
   }
-
+  handleRefresh(event:CustomEvent){
+    this.getRooms();
+    (event.target as HTMLIonRefresherElement).complete();
+    this.resetFilter()
+  }
   ngOnInit() {}
   onFilterChange(type: string) {
     if (type) {
@@ -66,6 +65,24 @@ export default class RoomsPage implements OnInit {
   registerIcons() {
     addIcons({
       addCircleOutline,
+    });
+  }
+  private getRooms(){
+    this._roomService.getAllRooms().subscribe({
+      next:(data:any)=>{
+        this.rooms=data.data
+        this.filteredRooms=this.rooms
+      }
+    })
+  }
+  private resetFilter(){
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        console.log('Cambiando de página, reseteando filtro...');
+        if (this.roomFilter) {
+          this.roomFilter.selectedType = ''; // Reiniciar filtro
+        }
+      }
     });
   }
 }
