@@ -1,6 +1,6 @@
 # Hotel Management App - Ionic + Node.js API
 
-Esta es una aplicación móvil desarrollada en Ionic que consume una API REST construida con Node.js, Express y MySQL. La aplicación permite gestionar reservaciones de habitaciones, autenticación de usuarios (Admin y Cliente), y administración de habitaciones.
+Esta es una aplicación móvil desarrollada en Ionic que consume una API REST construida con Node.js, Express y MySQL. La aplicación permite gestionar reservaciones de habitaciones, autenticación de usuarios (Admin y Cliente), y administración de habitaciones. Además la autenticación con Firebase mediante Google y Github
 
 ## Requisitos Previos
 
