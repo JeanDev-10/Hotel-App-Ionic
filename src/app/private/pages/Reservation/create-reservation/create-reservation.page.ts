@@ -22,7 +22,7 @@ import { ReservationService } from 'src/app/core/services/reservation.service';
     RoomGalleryComponent,
   ],
 })
-export default class CreateReservationPage implements OnInit {
+export default class CreateReservationPage  {
   private route = inject(ActivatedRoute);
   private _reservationService = inject(ReservationService);
   private _router = inject(Router);
@@ -37,9 +37,9 @@ export default class CreateReservationPage implements OnInit {
   maxStartDate!: string;
   minEndDate!: string;
   constructor() {}
-
-  ngOnInit() {
-    // Obtener la habitación desde el estado de navegación
+  ionViewWillEnter() {
+    this.room = this.route.snapshot.data['oneRoom'].room;
+     // Obtener la habitación desde el estado de navegación
 
     // Establecer fechas mínimas y máximas
     const today = new Date().toISOString();
@@ -48,9 +48,6 @@ export default class CreateReservationPage implements OnInit {
       new Date().setFullYear(new Date().getFullYear() + 1)
     ).toISOString();
     this.minEndDate = today;
-  }
-  ionViewWillEnter() {
-    this.room = this.route.snapshot.data['oneRoom'].room;
   }
   ionViewDidLeave() {
     this.resetValues();
