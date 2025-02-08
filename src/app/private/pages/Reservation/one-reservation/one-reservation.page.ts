@@ -70,7 +70,7 @@ export default class OneReservationPage {
         this._toastService.presentToastSucess(
           'Reservación cancelada correctamente!'
         );
-        this._router.navigateByUrl('/dashboard/reservation/me');
+        this._router.navigateByUrl('/dashboard/reservation-me');
       },
     });
   }

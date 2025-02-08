@@ -47,7 +47,6 @@
         min="{{ minStartDate }}"
         max="{{ maxStartDate }}"
         (ionChange)="calculateTotalPrice()"
-        [value]="defaultDate"
         [(ngModel)]="dateStart"
       >
       </ion-datetime>
@@ -59,7 +58,6 @@
       <ion-datetime
         displayFormat="DD/MM/YYYY"
         min="{{ minEndDate }}"
-        [value]="defaultEndDate"
         [(ngModel)]="dateEnd"
         (ionChange)="calculateTotalPrice()"
       >

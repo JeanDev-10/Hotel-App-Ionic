@@ -36,21 +36,7 @@ export default class CreateReservationPage implements OnInit {
   minStartDate!: string;
   maxStartDate!: string;
   minEndDate!: string;
-
-
-  defaultDate: string;
-  defaultEndDate: string;
-
-  constructor() {
-    const today = new Date();
-    today.setHours(8, 0, 0, 0); // Establecer 08:00 AM
-    this.defaultDate = today.toISOString();
-
-    const tomorrow = new Date();
-    tomorrow.setDate(today.getDate() + 1);
-    tomorrow.setHours(8, 0, 0, 0); // Establecer 08:00 AM en la fecha de fin
-    this.defaultEndDate = tomorrow.toISOString();
-  }
+  constructor() {}
 
   ngOnInit() {
     // Obtener la habitación desde el estado de navegación
@@ -87,7 +73,7 @@ export default class CreateReservationPage implements OnInit {
     };
     this._reservationService.createReservation(reservationData).subscribe({
       next: () => {
-        this._router.navigateByUrl('/dashboard/reservation/me');
+        this._router.navigateByUrl('/dashboard/reservation-me');
         this._toastService.presentToastSucess('Reserva creada con exito!');
         this.resetValues();
       },

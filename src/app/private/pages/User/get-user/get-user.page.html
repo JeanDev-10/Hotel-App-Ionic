@@ -5,7 +5,9 @@
   <app-profile [user]="user" />
   <ion-list>
     <ion-list-header>Reservaciones</ion-list-header>
-    <app-reservation-list [reservations]="user.reservations"  />
+    <app-reservation-filter (filterChange)="onFilterChange($event)" />
+
+    <app-reservation-list [reservations]="reservationFiltered" />
   </ion-list>
   }
 </ion-content>

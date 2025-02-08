@@ -7,6 +7,7 @@ import { NavbarComponent } from '../../../../shared/components/navbar/navbar.com
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProfileComponent } from '../components/profile/profile.component';
 import { ReservationsListComponent } from '../../Reservation/components/reservations-list/reservations-list.component';
+import { ReservationFilterComponent } from "../../Reservation/components/reservation-filter/reservation-filter.component";
 
 @Component({
   selector: 'app-get-user',
@@ -21,15 +22,27 @@ import { ReservationsListComponent } from '../../Reservation/components/reservat
     RouterModule,
     ProfileComponent,
     ReservationsListComponent,
-  ],
+    ReservationFilterComponent
+],
 })
 export default class GetUserPage implements OnInit {
   private readonly _route=inject(ActivatedRoute)
   user!:any
+  reservationFiltered!:any
   constructor() {}
   ionViewWillEnter() {
     this.user = this._route.snapshot.data['user'].data;
+    this.reservationFiltered=this.user.reservations
   }
-
+  onFilterChange(type: string) {
+    console.log(type);
+    if (type) {
+      this.reservationFiltered = this.user.reservations.filter(
+        (room: any) => room.status_reservation.name === type
+      );
+    } else {
+      this.reservationFiltered = this.user.reservations; // Mostrar todas las habitaciones si no hay filtro
+    }
+  }
   ngOnInit() {}
 }
