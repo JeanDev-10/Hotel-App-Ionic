@@ -1,7 +1,7 @@
 
   <ion-card *ngIf="user" class="profile">
-    <ion-card-header class="profile-avatar">
-      <ion-img src="assets/images/avatar.png" alt="Avatar" />
+    <ion-card-header class="profile-avatar" >
+        <ion-img [src]="user?.image||'https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png'" />
     </ion-card-header>
     <ion-card-content>
       <!-- Otras secciones de información del perfil -->

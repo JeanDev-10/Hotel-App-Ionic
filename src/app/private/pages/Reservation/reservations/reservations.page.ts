@@ -24,23 +24,23 @@ import { ReservationService } from 'src/app/core/services/reservation.service';
 })
 export default class ReservationsPage implements OnInit {
   private route = inject(ActivatedRoute);
-  private _reservationService=inject(ReservationService);
+  private _reservationService = inject(ReservationService);
   reservations!: any;
   filteredReservation!: any;
   @ViewChild(ReservationFilterComponent)
   reservationFilter!: ReservationFilterComponent;
 
   constructor(private router: Router) {
-
+    this.resetFilter()
   }
   ionViewWillEnter() {
     this.reservations = this.route.snapshot.data['reservations'].data;
     this.filteredReservation = this.reservations;
   }
-  handleRefresh(event:CustomEvent){
-    this.getReservations();
-    (event.target as HTMLIonRefresherElement).complete();
-    this.resetFilter()
+  handleRefresh(event: CustomEvent) {
+    this.getReservations(event);
+    this.reservationFilter.selectedType = ''; // Reiniciar filtro
+
   }
   onFilterChange(type: string) {
     console.log(type);
@@ -53,16 +53,17 @@ export default class ReservationsPage implements OnInit {
     }
   }
 
-  ngOnInit() {}
-  private getReservations(){
+  ngOnInit() { }
+  private getReservations(event:any) {
     this._reservationService.getAllReservations().subscribe({
-      next:(data:any)=>{
+      next: (data: any) => {
         this.reservations = data.data;
         this.filteredReservation = this.reservations;
+        (event.target as HTMLIonRefresherElement).complete();
       }
     })
   }
-  private resetFilter(){
+  private resetFilter() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         console.log('Cambiando de página, reseteando filtro...');

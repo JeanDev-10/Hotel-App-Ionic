@@ -1,7 +1,6 @@
 <app-navbar [title]="'Inicio de sesión'" />
 
 <ion-content [fullscreen]="true">
-
   <div class="flex-register">
     <ion-text color="dark">
       <h1>Inicio de sesión</h1>
@@ -73,7 +72,7 @@
           <p>¿No tienes cuenta?</p>
         </ion-text>
         <ion-button
-        color="warning"
+          color="warning"
           [fill]="loginForm.invalid?'outline':'clear'"
           type="submit"
           [disabled]="loginForm.invalid"
@@ -83,5 +82,25 @@
         </ion-button>
       </div>
     </form>
+    <div class="button_iniciar_sesion_google">
+      <ion-button
+        (click)="loginGoogle()"
+        expand="block"
+        color="warning"
+        shape="round"
+      >
+        Iniciar sesion con Google
+        <ion-icon name="logo-google" slot="start"></ion-icon>
+      </ion-button>
+      <ion-button
+        (click)="loginGithub()"
+        expand="block"
+        color="primary"
+        shape="round"
+      >
+        Iniciar sesion con Github
+        <ion-icon name="logo-github" slot="start"></ion-icon>
+      </ion-button>
+    </div>
   </div>
 </ion-content>

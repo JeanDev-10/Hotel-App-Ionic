@@ -50,7 +50,8 @@ export default class RoomsPage implements OnInit {
   handleRefresh(event:CustomEvent){
     this.getRooms();
     (event.target as HTMLIonRefresherElement).complete();
-    this.resetFilter()
+    this.roomFilter.selectedType = ''; // Reiniciar filtro
+
   }
   ngOnInit() {}
   onFilterChange(type: string) {
