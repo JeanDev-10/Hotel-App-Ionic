@@ -1,0 +1,21 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="room" routerLink="/dashboard/room"  routerDirection="root">
+      <ion-icon  name="home-sharp"></ion-icon>
+      <ion-label></ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="reservation" *hasRole="'Admin'"  routerLink="/dashboard/reservation" routerDirection="root">
+      <ion-icon name="calendar-sharp"></ion-icon>
+      <ion-label></ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="reservation-me"  routerLinkActive="tab-selected" *hasRole="'Client'"  routerLink="/dashboard/reservation-me" routerDirection="root">
+      <ion-icon name="calendar-sharp"></ion-icon>
+      <ion-label></ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile" routerLink="/dashboard/profile" routerDirection="root">
+      <ion-icon name="person-sharp"></ion-icon>
+      <ion-label></ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

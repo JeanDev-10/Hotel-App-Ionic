@@ -1,0 +1,88 @@
+<app-navbar title="Crear reservación" hrefDefault="/dashboard/room" />
+
+<ion-content class="ion-padding">
+  @if(room){
+
+  <!-- Información de la habitación -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ room.name }}</ion-card-title>
+      <ion-card-subtitle>{{ room.types_room.name }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p><strong>Descripción:</strong> {{ room.description }}</p>
+      <p>
+        <strong>Precio por noche:</strong>
+        <ion-text color="success">${{ room.price}}</ion-text>
+      </p>
+
+      <app-room-gallery [images]="room.images" />
+    </ion-card-content>
+  </ion-card>
+  @if(room.reservations.length > 0){
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Fechas que han sido reservadas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let reservation of room.reservations">
+          <ion-label>
+            Del {{ reservation.date_start | date:'fullDate' }} hasta el {{
+            reservation.date_end | date:'fullDate' }}
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  }
+  <!-- Formulario de reservación -->
+  <ion-list>
+    <!-- Fecha de inicio -->
+    <ion-item>
+      <ion-label position="stacked">Fecha de inicio</ion-label>
+      <ion-datetime
+        displayFormat="DD/MM/YYYY"
+        min="{{ minStartDate }}"
+        max="{{ maxStartDate }}"
+        (ionChange)="calculateTotalPrice()"
+        [(ngModel)]="dateStart"
+      >
+      </ion-datetime>
+    </ion-item>
+
+    <!-- Fecha de fin -->
+    <ion-item>
+      <ion-label position="stacked">Fecha de fin</ion-label>
+      <ion-datetime
+        displayFormat="DD/MM/YYYY"
+        min="{{ minEndDate }}"
+        [(ngModel)]="dateEnd"
+        (ionChange)="calculateTotalPrice()"
+      >
+      </ion-datetime>
+    </ion-item>
+  </ion-list>
+  <ion-card>
+    <ion-card-content>
+      <p>
+        <strong>Precio total:</strong>
+        <ion-text color="success"> ${{ totalPrice }} </ion-text>
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Botón para crear reservación -->
+  <div class="button-reserva">
+    <ion-button
+      fill="outline"
+      color="warning"
+      (click)="createReservation()"
+      [disabled]="!isFormValid()"
+    >
+      Crear Reservación
+    </ion-button>
+  </div>
+  }
+</ion-content>

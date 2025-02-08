@@ -1,0 +1,12 @@
+<app-navbar title="Reservaciones" />
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  @if(reservations){
+  <app-reservation-filter (filterChange)="onFilterChange($event)" />
+
+  <app-reservation-list [reservations]="filteredReservation" [showUserInfo]="true" />
+  }
+</ion-content>

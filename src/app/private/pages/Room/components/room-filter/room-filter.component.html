@@ -1,0 +1,9 @@
+<!-- room-filter.component.html -->
+<ion-toolbar>
+  <ion-segment [(ngModel)]="selectedType" (ionChange)="onFilterChange()">
+    <ion-segment-button value=""> Todas </ion-segment-button>
+    <ion-segment-button value="Estándar" color="dark"> Estándar </ion-segment-button>
+    <ion-segment-button value="Suite" color="tertiary"> Suite </ion-segment-button>
+    <ion-segment-button value="Familiar" color="warning"> Familiar </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>

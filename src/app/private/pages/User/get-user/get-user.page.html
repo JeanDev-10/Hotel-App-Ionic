@@ -1,0 +1,13 @@
+<app-navbar title="Perfil de Usuario" hrefDefault="/dashboard" />
+
+<ion-content class="ion-padding">
+  @if(user){
+  <app-profile [user]="user" />
+  <ion-list>
+    <ion-list-header>Reservaciones</ion-list-header>
+    <app-reservation-filter (filterChange)="onFilterChange($event)" />
+
+    <app-reservation-list [reservations]="reservationFiltered" />
+  </ion-list>
+  }
+</ion-content>

@@ -1,0 +1,36 @@
+<app-navbar [title]="'Mi perfil'" hrefDefault="/dashboard" />
+
+<ion-content class="ion-padding">
+  <!-- Segment para cambiar entre Perfil y Configuración -->
+  <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="profile">
+      <ion-label>Perfil</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="settings">
+      <ion-label>Configuración</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Contenido del Perfil -->
+  <div *ngIf="segment === 'profile'">
+    <div class="profile-container">
+      @if(user){
+      <app-profile [user]="user" />
+      <div>
+        <ion-button
+          (click)="logout()"
+          expand="block"
+          fill="outline"
+          color="danger"
+          >Cerrar Sesión</ion-button
+        >
+      </div>
+    }
+    </div>
+  </div>
+
+  <!-- Contenido de Configuración -->
+  <div *ngIf="segment === 'settings'" class="settings">
+    <app-change-password />
+  </div>
+</ion-content>

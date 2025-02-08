@@ -1,0 +1,22 @@
+.flex-register {
+  height: auto;
+  margin-top: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  form {
+    width: 100%;
+  }
+}
+
+.flex_button_register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+ion-item {
+  margin-bottom: 20px;
+}
+
