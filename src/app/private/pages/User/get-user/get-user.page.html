@@ -1,13 +1,13 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>getUser</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-navbar title="Perfil de Usuario" hrefDefault="/dashboard" />
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">getUser</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  @if(user){
+  <app-profile [user]="user" />
+  <ion-list>
+    <ion-list-header>Reservaciones</ion-list-header>
+    <app-reservation-filter (filterChange)="onFilterChange($event)" />
+
+    <app-reservation-list [reservations]="reservationFiltered" />
+  </ion-list>
+  }
 </ion-content>

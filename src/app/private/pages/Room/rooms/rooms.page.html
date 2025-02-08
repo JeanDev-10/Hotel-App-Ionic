@@ -1,13 +1,34 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>rooms</ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- room-list.component.html -->
+<app-navbar title="Habitaciones" />
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">rooms</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<app-room-filter (filterChange)="onFilterChange($event)" />
+
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-button
+    *hasRole="'Admin'"
+    size="small"
+    routerLink="/dashboard/room/create"
+    color="dark"
+    shape="round"
+    class="button__create__room"
+  >
+    <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+    Crear habitación
+  </ion-button>
+  <ion-list>
+    @if(filteredRooms){ @for(room of filteredRooms; track room.id){
+    <ion-item>
+      <app-room-card [room]="room" [routerLink]="'/dashboard/room/'+room.id" />
+    </ion-item>
+    } @empty{
+    <ion-card>
+      <ion-card-content>
+        <ion-text color="medium">No hay habitaciones registradas.</ion-text>
+      </ion-card-content>
+    </ion-card>
+    } }
+  </ion-list>
 </ion-content>

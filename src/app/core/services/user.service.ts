@@ -5,6 +5,13 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class UserService {
-  private readonly api_url = `${environment.ApiUrl}`;
+  private readonly apiUrl = `${environment.ApiUrl}user`;
   private readonly _http = inject(HttpClient);
+
+  getUserReservations(userId: string) {
+    return this._http.get(`${this.apiUrl}/${userId}/reservations`);
+  }
+  changePassword(data: any) {
+    return this._http.put(`${this.apiUrl}/password`,data);
+  }
 }

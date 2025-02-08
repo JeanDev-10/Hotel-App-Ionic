@@ -1,0 +1,60 @@
+<ion-list>
+  @for (reservation of reservations; track reservation.id;let index=$index) {
+
+  <ion-item [routerLink]="'/dashboard/reservation/' + reservation.id">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Reservación #{{ index + 1 }}</ion-card-title>
+        <ion-card-subtitle>
+          <strong>Estado: </strong>
+          <ion-text
+            [color]="
+              reservation.status_reservation.id == 3 ? 'danger' : 'warning'
+            "
+            >{{ reservation.status_reservation.name }}</ion-text
+          >
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <!-- Información de la reservación -->
+        <p><strong>Habitación:</strong> {{ reservation.room?.name||'Habitación eliminada' }}</p>
+        <p>
+          <strong>Tipo de habitación:</strong>
+          {{ reservation.room?.types_room.name || 'Desconocido' }}
+        </p>
+        <p>
+          <strong>Fecha de inicio:</strong>
+          {{ reservation.date_start | date : "fullDate" }}
+        </p>
+        <p>
+          <strong>Fecha de fin:</strong>
+          {{ reservation.date_end | date : "fullDate" }}
+        </p>
+        <p>
+          <strong>Precio total:</strong>
+          <ion-text color="success">${{ reservation.price_total }}</ion-text>
+        </p>
+
+        <!-- Información del usuario (solo para admin) -->
+        @if(showUserInfo){
+        <ng-container *hasRole="'Admin'">
+          <p>
+            <strong>Usuario:</strong> {{ reservation.user.name }}
+            {{ reservation.user.lastname }}
+          </p>
+          <p><strong>Email:</strong> {{ reservation.user.email }}</p>
+        </ng-container>
+        }
+      </ion-card-content>
+    </ion-card>
+  </ion-item>
+  }
+  @empty{
+    <ion-card>
+      <ion-card-content>
+        <ion-text color="medium">No hay reservaciones registradas.</ion-text>
+      </ion-card-content>
+    </ion-card>
+  }
+</ion-list>

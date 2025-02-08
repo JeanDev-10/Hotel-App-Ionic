@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { NoAuthGuard } from '../core/guards/notLogged.guard';
 
 export const PUBLIC_ROUTES: Routes = [
   {
@@ -8,6 +9,7 @@ export const PUBLIC_ROUTES: Routes = [
   },
   {
     path: 'auth',
+    canActivate:[NoAuthGuard],
     loadChildren: () =>
       import('../auth/auth.routes')
   },

@@ -1,0 +1,38 @@
+<!-- room-gallery.component.html -->
+<ion-grid>
+  <ion-row>
+    @if(images.length==1){
+      <ion-col size="12" >
+        <ion-img
+          [src]="images[0].url"
+          (click)="openImage(0)"
+          alt="Imagen de la habitación"
+        ></ion-img>
+      </ion-col>
+    }@else {
+      <ion-col size="6" *ngFor="let image of images; let i = index">
+        <ion-img
+        [src]="image.url"
+        (click)="openImage(i)"
+        alt="Imagen de la habitación"
+        ></ion-img>
+      </ion-col>
+    }
+  </ion-row>
+</ion-grid>
+
+<!-- Modal para mostrar la imagen maximizada -->
+<ion-modal [isOpen]="isModalOpen" (didDismiss)="closeImage()">
+  <ng-template>
+    <ion-content>
+      <swiper-container [options]="slideOpts" *ngIf="isModalOpen">
+        <swiper-slide *ngFor="let image of images"
+          ><ion-img [src]="image.url" alt="Imagen maximizada"></ion-img
+        ></swiper-slide>
+      </swiper-container>
+      <ion-button (click)="closeImage()" expand="full" fill="clear">
+        Cerrar
+      </ion-button>
+    </ion-content>
+  </ng-template>
+</ion-modal>

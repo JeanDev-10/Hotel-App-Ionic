@@ -1,0 +1,26 @@
+
+  <ion-card *ngIf="user" class="profile">
+    <ion-card-header class="profile-avatar">
+      <ion-img src="assets/images/avatar.png" alt="Avatar" />
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Otras secciones de información del perfil -->
+      <ion-list>
+        <ion-item>
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-note  color="dark">{{ user.name|titlecase }} {{ user.lastName|titlecase }}</ion-note>
+
+        </ion-item>
+        <ion-item>
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-note color="dark">{{ user.email|titlecase }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="people-outline" slot="start"></ion-icon>
+          <ion-note color="dark">{{ user.role.name }}</ion-note>
+        </ion-item>
+
+        <!-- Otras propiedades del usuario -->
+      </ion-list>
+    </ion-card-content>
+  </ion-card>

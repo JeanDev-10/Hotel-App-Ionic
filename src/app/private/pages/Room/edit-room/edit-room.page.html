@@ -1,13 +1,15 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>editRoom</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-navbar title="Editar habitación" hrefDefault="/dashboard/room" />
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">editRoom</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  @if(roomTypes&&room){
+    <app-room-form
+    [roomTypes]="roomTypes"
+    [roomData]="room"
+    (formSubmit)="onFormSubmit($event)"
+    ></app-room-form>
+    <app-image-upload
+    [existingImages]="room?.images"
+    (imagesChange)="onImagesChange($event)"
+    ></app-image-upload>
+  }
 </ion-content>

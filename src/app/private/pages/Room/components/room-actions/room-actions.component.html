@@ -1,0 +1,23 @@
+<!-- room-actions.component.html -->
+<ion-grid>
+  <ion-row>
+    <ion-col *hasRole="'Admin'">
+      <ion-button expand="block" fill="solid" color="warning" (click)="onEdit()">
+        <ion-icon slot="start" name="pencil-outline"></ion-icon>
+        Editar
+      </ion-button>
+    </ion-col>
+    <ion-col *hasRole="'Admin'">
+      <ion-button expand="block" fill="outline" color="danger" (click)="onDelete()">
+        <ion-icon slot="start" name="close-outline"></ion-icon>
+        Eliminar
+      </ion-button>
+    </ion-col>
+    <ion-col *hasRole="'Client'">
+      <ion-button expand="block" fill="outline" color="success" (click)="onReserve()">
+        <ion-icon slot="start" name="checkbox-outline"></ion-icon>
+        Reservar
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
