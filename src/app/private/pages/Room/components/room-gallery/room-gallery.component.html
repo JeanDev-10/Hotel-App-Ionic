@@ -1,23 +1,23 @@
 <!-- room-gallery.component.html -->
 <ion-grid>
   <ion-row>
-    @if(images.length==1){
-      <ion-col size="12" >
-        <ion-img
-          [src]="images[0].url"
-          (click)="openImage(0)"
-          alt="Imagen de la habitación"
-        ></ion-img>
-      </ion-col>
+    @if(images){ @if(images.length==1){
+    <ion-col size="12">
+      <ion-img
+        [src]="images[0].url"
+        (click)="openImage(0)"
+        alt="Imagen de la habitación"
+      ></ion-img>
+    </ion-col>
     }@else {
-      <ion-col size="6" *ngFor="let image of images; let i = index">
-        <ion-img
+    <ion-col size="6" *ngFor="let image of images; let i = index">
+      <ion-img
         [src]="image.url"
         (click)="openImage(i)"
         alt="Imagen de la habitación"
-        ></ion-img>
-      </ion-col>
-    }
+      ></ion-img>
+    </ion-col>
+    } }
   </ion-row>
 </ion-grid>
 
