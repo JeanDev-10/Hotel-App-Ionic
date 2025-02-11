@@ -1,8 +1,9 @@
 {
   "name": "Ionic-Hotel-App",
   "version": "0.0.1",
-  "author": "Ionic Framework",
+  "author": "Jean Rodríguez",
   "homepage": "https://ionicframework.com/",
+  "description":"APP para control de reservas de habitaciones en hotel consumiendo una API Rest en Nodejs Express Firebase Mysql",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
